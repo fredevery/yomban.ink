@@ -1,11 +1,6 @@
----
-title: "005 — Content and editing (built-in content capability; Q54)"
-status: "LOCKED-SCOPE / DESIGN-DEFERRED"
-date: "2026-10-04"
-source-discovery: "understanding.md Q1, Q7, Q42, Q43, Q54 (primary); Q38–Q40, Q47, Q51, Q57–Q59, Q62, Q65–Q68, Q70 (adjacent)"
----
+# Yomban.ink: content and editing
 
-# 005 — Content and editing (the built-in content capability)
+Status: Locked scope / design-deferred — the content/admin/editing capability is an MVP deliverable; Q54's workflow design remains a foundational gate (canonical gate table in the [spec index](000_index.md#canonical-gate-table)). No presentation implementation is selected.
 
 ## 1. Purpose and authority
 
@@ -146,17 +141,16 @@ closure, Q19/Q61). Covers:
 
 ### 6.2 Owner and closure
 
-- **Owner:** content/publishing/editing design in **spike plan 000** (planned, not yet
-  authored — Q26).
-- **Closure:** one ADR + concrete design + workflow/evidence tests, satisfying the
-  testable acceptance in §8, with Q67 (§7) supplying publishing-freshness/preview-
-  cache guarantees it needs.
+- **Owner, evidence and block: canonical gate table in the [spec index](000_index.md#canonical-gate-table)**
+  (spike plan 000). Closure = one ADR + concrete design + workflow/evidence tests satisfying the
+  testable acceptance in §8, with Q67 (§7) supplying the publishing-freshness/preview-cache
+  guarantees it needs. [Q19, Q54]
 
 ### 6.3 What Q54 blocks
 
-Q54 is a **foundational gate**: it blocks **built-in content/workflow
-implementation, in-situ editing, and pilot content requirements** (Q54). Work whose
-own gate is met may proceed; this is not a blanket pre-implementation block (Q19).
+Q54 is a **foundational gate**: it blocks **built-in content/workflow implementation, in-situ
+editing, and pilot content requirements** — work whose own gate is met may proceed; this is not a
+blanket pre-implementation block (Q19). See the canonical gate table for the full block list.
 
 ### 6.4 What feeds and depends on Q54
 
@@ -173,27 +167,17 @@ own gate is met may proceed; this is not a blanket pre-implementation block (Q19
 
 ## 7. Q67 — affected-work gate the editing/preview work depends on
 
-**Status: DEFERRED; affected-work gate, not a blanket pre-implementation gate (Q67).**
+**Status: DEFERRED; affected-work gate, not a blanket pre-implementation gate (Q67). Owner, required outcome and block: canonical gate table in the [spec index](000_index.md#canonical-gate-table)** — coordinated with **Q54** (which supplies draft/publish/schedule/preview needs), **Q57** (the core typed cache capability with purge hooks — locked) and **Q66** (durable/reliable effect and retry handling). [Q67]
 
-- **Owner:** cache/editing consistency design in spike plan 000, coordinated with
-  **Q54** (which supplies draft/publish/schedule/preview needs), **Q57** (the core
-  typed cache capability with purge hooks — locked), and **Q66** (durable/reliable
-  effect and retry handling — locked as a separate affected-work gate).
-- **Outcome required:** one ADR plus explicit **author read-your-writes** behaviour,
-  **publication acknowledgement** semantics, tolerated **public propagation/staleness**
-  window, an **authoritative version/pointer source**, local/global purge mechanism,
-  failure/retry diagnostics, and **cache-key/permission policy**.
-- **Drafts and authenticated previews** must bypass shared public caches or use
-  **provably isolated** cache keys/access; private/no-store responses and
-  presentation-library history snapshots must not expose drafts/secrets between users
-  or preview/public contexts. HTTP cache directives alone are not a policy for
-  JavaScript history caches.
-- **Freshness limits are not invented here:** no concrete public-staleness time or
-  global synchronous visibility is selected during this fold; a stale KV version
-  pointer is **not** assumed to solve freshness (Q57/Q67).
-- **Blocks:** affected **cache/content-preview/editing consistency implementation and
-  MVP deployment**; closes before that work starts, not before unrelated
-  implementation whose own gates are met (Q67).
+Editing/preview-specific consequences this spec owns:
+
+- **Drafts and authenticated previews** must bypass shared public caches or use **provably
+  isolated** cache keys/access; private/no-store responses and presentation-library history
+  snapshots must not expose drafts/secrets between users or preview/public contexts. HTTP cache
+  directives alone are not a policy for JavaScript history caches.
+- **Freshness limits are not invented here:** no concrete public-staleness time or global
+  synchronous visibility is selected; a stale KV version pointer is **not** assumed to solve
+  freshness (Q57/Q67).
 - **Q66 (adjacent affected-work gate)** owns durable publish/invalidation effects,
   retries and idempotency so a committed publish cannot be followed by a lost cache
   purge or duplicate effect; it also must close before affected writing/publishing

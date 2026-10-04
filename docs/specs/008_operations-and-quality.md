@@ -44,33 +44,14 @@ MVP operational acceptance:
 
 ## Deferred affected-work design gates
 
-These gates are separate from foundational prerequisites Q38, Q40, Q46, Q47, Q54, Q63 and Q70 (see [index](000_index.md) and [product/MVP](001_product-and-mvp.md)). Q65–Q68 close before their own affected implementation and before MVP deployment, but do not block unrelated work whose own prerequisites are met. They require one ADR plus concrete design and evidence; candidates are not adopted by being documented. [Q19]
+These gates are separate from the foundational prerequisites Q38/Q40/Q46/Q47/Q54/Q63/Q70 (see [index](000_index.md) and [product/MVP](001_product-and-mvp.md)). Q65–Q68 close before their own affected implementation and before MVP deployment, but do not block unrelated work whose own prerequisites are met. **Owner/design deliverable and block for every gate is the canonical gate table in the [Specification index](000_index.md#canonical-gate-table)** — each requires one ADR plus concrete design and evidence; candidates are not adopted by being documented. [Q19]
 
-### Q65 — Backup, retention and coordinated restore
+The operational concerns this spec owns (the design scope itself is the canonical table's):
 
-- **Owner:** delivery/data-safety design in spike plan 000, coordinated with Q60 environments, Q63 migration/removal safety, Q58 media keys/ownership and the privacy erasure/retention primitives ([Security and identity](007_security-and-identity.md)). [Q26, Q58, Q60, Q63, Q65]
-- **Required outcome:** one ADR plus a concrete D1/R2 backup, retention, restore and recovery procedure covering consistency of records and referenced objects, credentials/isolation, retention/deletion and recovery expectations, **and the erasure/right-to-be-forgotten primitives that let a consuming project fulfil a data-subject request** (the platform-guardrail half of the privacy scope split in [Security and identity](007_security-and-identity.md)). D1 export remains the chosen DB direction, not proof of coordinated recovery. Do not prescribe unavailable native R2 bucket versioning; evaluate separately protected recoverable copies without silently choosing a vendor/mechanism. [Q60, Q65]
-- **Evidence:** exercise restoration of database records and referenced assets; demonstrate recovery for relevant migration/media failure cases. [Q65]
-- **Blocks:** affected ops/data-safety/media-retention implementation, privacy erasure/DSR primitives, and MVP deployment, not unrelated implementation. [Q19, Q65]
-
-### Q66 — Durable side effects, retries and idempotency
-
-- **Owner:** async/unit-of-work consistency design in spike plan 000, coordinated with Q40 service participation/lifetime, Q52 single-D1 atomicity, Q56 job wiring, Q57/Q67 invalidation and Q54 publishing. [Q40, Q52, Q54, Q56, Q57, Q66, Q67]
-- **Required outcome:** one ADR plus contracts for post-commit effects; at-least-once assumptions; idempotency ownership/keys and repeated-ID/different-payload behavior; enqueue-gap recovery; acknowledgement/retry/backoff/dead-letter/replay; payload compatibility across deployments; diagnostics. Distinguish critical durable work from best-effort telemetry. A D1 transactional outbox is an evaluation candidate only; no MVP event bus is selected. Effects across databases, R2, queues and cache need separate recovery/compensation, never claimed atomic under Q52. [Q52, Q56, Q66]
-- **Evidence:** inject commit/enqueue/purge failures; test duplicate delivery, poison/replay and payload upgrades without duplicating successful business effects. [Q61, Q66]
-- **Blocks:** affected write/job/publishing/effect implementation and MVP deployment, not unrelated implementation. [Q19, Q66]
-
-### Q67 — Author consistency, public propagation and preview isolation
-
-- **Owner:** cache/editing consistency design in spike plan 000, with Q54 publishing/preview needs, Q57 cache capability and Q66 durable effect/retry handling. [Q54, Q57, Q66, Q67]
-- **Required outcome:** one ADR plus explicit author read-your-writes, publication acknowledgement, tolerated public propagation/staleness window, authoritative version/pointer source, local/global purge mechanism, failure/retry diagnostics and cache-key/permission policy. No concrete staleness duration or global synchronous visibility is selected. A stale KV version pointer is not presumed fresh. [Q57, Q67]
-- Drafts/authenticated previews must bypass shared public caches or use provably isolated keys/access. Protect private/no-store responses and presentation-library history snapshots across users and preview/public contexts; HTTP cache directives alone do not govern JavaScript history caches. [Q54, Q59, Q67]
-- **Evidence:** test author/public and multiple-cache-location reads, publish/schedule, purge failure/retry and unauthorized previews; preserve the guarantees for API and optional HTML paths. [Q67]
-- **Blocks:** affected cache/content-preview/editing-consistency implementation and MVP deployment, not unrelated implementation. [Q19, Q67]
-
-### Q68 — Related security affected-work gate
-
-Q68 is owned by [Security and identity](007_security-and-identity.md): surface-profile applicability, permitted auth/registration, first-admin provisioning/recovery, session/credential/origin/CSRF rules and rate-limit policy/storage. It closes before affected auth/security/public-surface implementation and MVP deployment, not unrelated work. Q59's protections and Q50's role/scope vocabulary remain locked; the concrete Q68 mechanics do not. [Q19, Q50, Q59, Q68]
+- **Q65 — backup/retention/restore.** D1 export is the chosen DB direction (not proof of coordinated recovery); do **not** prescribe the unavailable native R2 bucket versioning; evaluate separately protected recoverable copies without silently choosing a vendor/mechanism. Evidence: restore DB records **and** referenced assets, plus recovery for relevant migration/media failure cases. [Q60, Q65]
+- **Q66 — durable side effects/retries/idempotency.** Distinguish critical durable business work from best-effort telemetry; a D1 transactional outbox is an evaluation candidate only; no MVP event bus. Effects across databases/R2/queues/cache need separate recovery, never claimed atomic under Q52. Evidence: inject commit/enqueue/purge failures; duplicate delivery, poison/replay and payload upgrades. [Q52, Q56, Q66]
+- **Q67 — author consistency + preview isolation.** Drafts/authenticated previews bypass shared public caches or use provably isolated keys/access; no concrete staleness duration or global synchronous visibility is selected; HTTP cache directives alone do not govern JavaScript history caches. Evidence: author/public and multiple-cache-location reads, publish/schedule, purge failure/retry and unauthorized previews. [Q54, Q57, Q67]
+- **Q68** is owned by [Security and identity](007_security-and-identity.md) — surface-profile applicability, permitted auth/registration, first-admin provisioning/recovery, session/credential/origin/CSRF rules and rate-limit policy/storage. Q59's protections and Q50's role/scope vocabulary remain locked. [Q19, Q50, Q59, Q68]
 
 ### Q70 — Client datastore capability and sync (foundational; operational aspects)
 

@@ -63,41 +63,22 @@ A boundary-lint + contract/conformance harness ships at MVP. Conformance runs as
 
 Modules declare transactional boundaries and use the core unit-of-work seam over D1 batch, never raw binding transactions. Atomicity is one D1 database and one prepared-statement batch; it is not atomic across databases, R2, queues or cache purges. Conformance is build-time; durable business effects, retries and idempotency (Q66) and cache/read-your-writes consistency (Q67) are separate affected-work gates and are not implied by registration. [Q52, Q61, Q66, Q67]
 
-## Enumerating what this specification deliberately does not decide
-
-Per the authoritative gate inventory (Q19), the following are foundational prerequisite designs that must close before foundational implementation. Each produces **one ADR plus a concrete design and verification evidence** — an ADR alone is not closure. The planned ADRs below are planned, not existing, and recording a candidate is not an approval.
-
 ## Deferred design, owner, evidence and block
 
-### Q38 — Core capability inventory (first foundational gate)
-- **Owner/design:** inventory of server/core/headless-client capabilities and the required-versus-optional capability policy.
-- **Evidence:** one ADR, the concrete inventory and capability checks, using Q42's completed shared-platform implications as audited input rather than reopening locked choices verbatim.
-- **Block:** blocks Q35 capability verification, finalized Q25/Q30 boundaries, Q37 auth/base infrastructure inventory, and foundational implementation start.
-- **Boundary:** inventories capabilities; it does **not** decide packaging-versus-execution, which Q40 alone owns. [Q19, Q38]
+Per the authoritative gate inventory (Q19), the foundational prerequisite designs must close
+before foundational implementation; Q65–Q68 are affected-work gates. **The owner/design
+deliverable and block for every gate is the canonical gate table in the
+[Specification index](000_index.md#canonical-gate-table)** — this spec cites it rather than
+restating the gate boilerplate. Each gate produces one ADR plus a concrete design and
+verification evidence; an ADR alone is not closure, and recording a candidate is not an approval.
 
-### Q40 — Package/export/composition/deployment/installation/lifecycle (foundational, alone owns package-vs-execution)
-- **Owner/design:** concrete package/export/wiring/deployment design. Owns server-only, headless/server-safe, browser/DOM and optional presentation export boundaries; optional module facets and composition roots importing core + concrete modules without core importing feature implementations; per-side core package layout; packaging-versus-execution for public app, starter, admin, controller and panel; route/SSR/hosting topology and auth-handler owner (cookies/session propagation, credentialed CORS/trusted origins/CSRF, one deployment per project); install/generated-ownership mechanics, repo/subpackage/tag-semver install rules, consumer updates without regeneration, and the deterministic AI-orientation artifact list and AI-fill/conformance boundary; immutable build metadata vs invocation-scoped context and service lifetime (no binding I/O at module initialization, no stale globally cached binding-derived client); ID mechanics/prefix collisions and the build-time enum/permission aggregation artifact; and registry services contributing deferred operations to the same single-D1 unit of work.
-- **Evidence:** one ADR plus design and verification evidence, including cross-module rollback proof and served-effective-config validation.
-- **Close:** final export/topology choices close together with Q47 after Q54 supplies workflow semantics.
-- **Block:** blocks composition, installation, lifecycle, and related packaging implementation until closed; public starter/dashboard/controller/panel remain unselected. [Q19, Q40, Q41, Q44, Q48, Q52, Q53]
+Module-platform-specific gate concerns:
 
-### Q47 — Framework-free client/wire/host/presentation (foundational)
-Frontend independence and shared contract packages (Q51) are locked; this spike designs mechanics, not whether to support them. Owns browser-safe exports, public DTOs derived from stored types, independent shared runtime schemas, route input/output validation, serialization/API/error conventions, separate DOM integration from headless code, and explicit dashboard/controller/panel implementation choices (no candidate is approved by implication). Blocks module client/wire/host interfaces and final Q40 exports. [Q19, Q47, Q51]
-
-### Q46 — Reopened public-site starter
-The public-site starter choice is explicitly reopened with none selected. Frontend independence is locked regardless. Blocks starter scaffolding and MVP public-client implementation. [Q19, Q46]
-
-### Q54 — Content/publishing/editing
-Content types/fields, draft/review/publish/schedule/revision semantics, preview permissions and DOM-to-entity host integration, with one ADR plus workflow/evidence tests. Blocks built-in content/workflow implementation, in-situ editing and pilot content requirements. [Q19, Q54]
-
-### Q63 — Database placement and migration mechanics
-Shared/separate D1 placement, namespace/collision rules, dependency ordering, ledger/history, concurrent-deploy locking, failure/retry, data-vs-schema migrations, Better Auth base-schema generation/integration and safe module removal/retention. Must prove Better Auth compatibility with core-generated prefixed TEXT ids against the selected Drizzle/D1 adapter; a failed check blocks auth work and is surfaced, not silently resolved by integer IDs. Blocks schema/migration/Better Auth persistence implementation and foundational implementation start. [Q19, Q37, Q45, Q63]
-
-### Q70 — Client datastore capability and sync (additive foundational gate)
-The browser-local SQLite store (the same SQLite dialect as D1, driven through the core datastore capability) plus the op-log sync layer: change-sets, presence leases, field-level conflict surfacing and server-authoritative working-set scope. Reopens no locked decision and adds no query-builder abstraction; owned in spike plan 000. Blocks the client-local store and sync/lock/conflict implementation, not unrelated work. [Q38, Q40, Q45, Q52, Q66, Q67, Q70]
-
-### Q65–Q68 — Affected-work gates (not blanket pre-implementation gates)
-Each closes before its own affected implementation and before MVP deployment, but does not block unrelated implementation whose own prerequisites are satisfied: **Q65** backup/retention/restore; **Q66** durable effects/retries/idempotency; **Q67** author read-your-writes, public propagation and preview isolation; **Q68** security surface profiles, rate limiting and auth/first-admin bootstrap. [Q19, Q65–Q68]
+- **Q38** inventories the core/headless capability set — it blocks Q35 capability verification and the finalized Q25/Q30 boundaries. It inventories capabilities; it does **not** decide packaging-versus-execution (Q40 alone owns that). [Q19, Q38]
+- **Q40** owns the composition/export/lifecycle mechanics this contract's manifest wiring depends on; final exports/topology are provisional until Q46/Q47 close. [Q19, Q40, Q41, Q44, Q48, Q52, Q53]
+- **Q63** owns the migration mechanics behind the module-owned schema/migrations this contract declares, including the Better Auth prefixed-TEXT-id evidence. [Q19, Q37, Q45, Q63]
+- **Q70** adds the datastore capability seam and the aggregate-root declarations this manifest carries. [Q38, Q40, Q45, Q52, Q66, Q67, Q70]
+- **Q65–Q68** are affected-work gates (not blanket pre-implementation gates): each closes before its own affected implementation and before MVP deployment. [Q19, Q65–Q68]
 
 ## MVP criteria (module-platform scope)
 
@@ -106,7 +87,7 @@ Each closes before its own affected implementation and before MVP deployment, bu
 - Module manifests declare identity/version, target contract major, dependencies, exposed services, required capabilities, named D1 requirements, schema/migrations, ID prefix, permissions, config, jobs and optional labelled UI contributions; conformance checks run in CLI/build/CI before registration. [Q35, Q49, Q61]
 - A representative pilot-derived scenario is deployed from scaffold with zero core edits; a service-only module registers without UI facets. [Q7, Q28, Q33, Q39, Q42]
 - The frontend-independence proof holds: plain HTML/server-rendered and bounded reactive-framework host fixtures read/edit/publish the same content through unchanged module services/contracts; these are acceptance fixtures, not additional production renderers. The fixture's minimal scope is defined in [Clients and presentation](004_clients-and-presentation.md) §Acceptance criteria. [Q7, Q47, Q61]
-- MVP deployment is gated on Q38/Q40/Q54/Q63 foundational closure and on Q65–Q68 affected-work designs/evidence. [Q19, Q60, Q65–Q68]
+- MVP deployment is gated on the foundational and affected-work gates as listed in the canonical gate table ([Specification index](000_index.md#canonical-gate-table)). [Q19, Q60, Q65–Q68]
 
 ## Post-MVP scope and explicit non-goals
 

@@ -41,7 +41,7 @@ Drizzle is the schema/query language and there is no query-builder abstraction. 
 
 Q63 splits from Q45 now that D1-only is locked. Module-owned migrations plus the core runner (Q37) are chosen; the mechanics are not. It is **deferred from onboarding by explicit dev decision** and is a **foundational prerequisite spike** (Q19), owned in spike plan 000.
 
-- **Owner/question:** database placement and migration mechanics design in **spike plan 000** (planned, not yet authored), coordinated with Q52 (single-D1/batch atomicity), Q25 (Drizzle-generated SQL execution path), Q40 (service participation/wiring) and Q65 (backup/recovery/retention). Outcome: **one ADR plus a concrete design and verification evidence** — an ADR alone is not closure. [Q19, Q63]
+- **Owner, evidence and block: canonical gate table in the [Specification index](000_index.md#canonical-gate-table)** — coordinated with Q52 (single-D1/batch atomicity), Q25 (Drizzle-generated SQL execution path), Q40 (service participation/wiring) and Q65 (backup/recovery/retention).
 - **Intended design scope (unresolved here):**
   - **shared D1 database vs separately bound databases** (selecting multiple bindings does not imply a distributed transaction);
   - **table/migration namespace and collision rules**;
@@ -55,7 +55,7 @@ Q63 splits from Q45 now that D1-only is locked. Module-owned migrations plus the
   - execution of **Drizzle-generated SQL migration artifacts** consistent with Q25. [Q37, Q44, Q63, Q65]
 - **Atomicity constraint:** the design respects Q52's single-database/prepared-statement-batch atomicity; no distributed transaction is implied by multiple bindings. [Q45, Q52, Q63]
 - **Required evidence:** empty and existing-version migration runs; failure/retry/concurrent-deploy safety; and Better Auth with the **selected Drizzle/D1 adapter using core-generated prefixed TEXT ids** (Q11), including auth flows/required entities. A **failed compatibility check blocks auth work and is surfaced**, not silently resolved by integer IDs. [Q11, Q63]
-- **Blocks:** affected **schema/migration and Better Auth persistence implementation**, and foundational implementation start; module ownership/core runner and D1/Drizzle decisions remain locked. [Q19, Q37, Q63]
+- **Blocks:** see the canonical gate table — affected **schema/migration and Better Auth persistence implementation**, and foundational implementation start; module ownership/core runner and D1/Drizzle decisions remain locked. [Q19, Q37, Q63]
 
 ## Q70 — Client datastore capability and sync (foundational gate, additive)
 
@@ -68,19 +68,18 @@ Q70 is **additive**: it reopens no locked decision and adds no query-builder abs
 - **Local durability.** The data write and its change-row are one local SQLite transaction; `navigator.storage.persist()` is requested (OPFS can be evicted) and authored (Class 1) data is separated from cache (Class 2).
 - **Versioning.** Sync payloads carry the contract version with a current + N-1 acceptance window (Q44/Q49); local schema migrations ship with the app, versioned, one-way, with a pre-migration snapshot.
 
-- **Owner/question:** local-first client datastore + sync design in **spike plan 000** (planned, not yet authored). Outcome: **one ADR plus a concrete design and verification evidence** — an ADR alone is not closure. [Q38, Q40, Q45, Q52, Q66, Q67, Q70]
-- **Blocks:** the client-local store, the sync/lock/conflict layer and their affected implementation; not unrelated implementation whose own gates are met.
+- **Owner, evidence and block: canonical gate table in the [Specification index](000_index.md#canonical-gate-table)** — coordinated with Q38/Q40/Q45/Q52/Q66/Q67. [Q38, Q40, Q45, Q52, Q66, Q67, Q70]
 - **Does not reopen:** Q10/Q45 (Drizzle, no query-builder abstraction, D1-only server), Q11 (identity) or Q52 (batch atomicity); it extends them.
 
 ## Deferred design, owner and block summary
 
-The authoritative gate inventory is Q19. For the data layer specifically:
+The authoritative gate inventory is Q19; **owner/evidence/block for every gate is the canonical gate table in the [Specification index](000_index.md#canonical-gate-table)**. Data-layer gate pointers:
 
-- **Q63** (above) is the foundational migration/placement spike, owned in spike plan 000; it closes before affected schema/migration/Better Auth persistence implementation and foundational implementation start.
-- **Q70** (above) owns the client datastore capability and sync — browser-local SQLite store, op-log change-sets, presence leases, field-level conflict surfacing and working-set scope — coordinated with Q38/Q40/Q45/Q52/Q66/Q67. It is additive and reopens no locked decision. [Q70]
+- **Q63** (above) — the foundational migration/placement spike.
+- **Q70** (above) — the additive client datastore + sync capability; reopens no locked decision. [Q70]
 - **Q40** owns ID mechanics and the registry deferred-UOW participation contract on top of Q52's batch atomicity. [Q11, Q40, Q41, Q52]
 - **Q45** left datastore-declaration locked to named D1 requirements; multiple bindings do not imply cross-database transactions. [Q45]
-- **Q65** (backup/restore) and **Q66** (durable effects/retries/idempotency) are affected-work gates closing before their affected implementation and before MVP deployment, not blanket pre-implementation gates. [Q19, Q65, Q66] → see [Operations and quality](008_operations-and-quality.md)
+- **Q65/Q66** are affected-work gates → see [Operations and quality](008_operations-and-quality.md).
 - **Q47** owns public-DTO wire mechanics over the mapped DTOs locked here. [Q10, Q47] → see [Clients and presentation](004_clients-and-presentation.md)
 
 ## MVP requirements (data scope)

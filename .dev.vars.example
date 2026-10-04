@@ -1,0 +1,18 @@
+# Yomban.ink — .dev.vars.example
+#
+# PLANNED (no implementation exists yet). This template carries the NON-SECRET development
+# values only (Q15). Copy to `.dev.vars` (gitignored) and fill in the secret values LOCALLY.
+#
+# Bindings (D1, R2, KV, queues) are declared in `wrangler.toml`/`.jsonc` — NOT here.
+#
+# NEVER commit `.dev.vars` or any real secret. Secrets are set via `wrangler secret put`
+# (cloud) and in the local `.dev.vars` only. Example: the better-auth signing key.
+
+# --- Non-secret development values -------------------------------------------------
+APP_ENV="development"
+# Illustrative only — the dev port is a project-config decision, NOT hardcoded (Q14).
+# Change it to match your configured dev port.
+PUBLIC_BASE_URL="http://localhost:8787"
+
+# --- Secret names (NO values — set these locally / via `wrangler secret put`) -------
+# BETTER_AUTH_SECRET=""

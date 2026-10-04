@@ -75,7 +75,7 @@ The **concrete** parts of the above that Q59 leaves open — exact per-surface p
 
 Q68 is **deferred from onboarding by explicit dev decision** and is an **affected-work gate**, not a blanket pre-implementation gate. This spec records its scope, owner, evidence and blockers without resolving the design (no decision promotion).
 
-- **Owner/question:** core security/auth design in **spike plan 000**, coordinated with Q40 (deployment/session/SSR topology, cookies/origins/CSRF, credentials), Q50 (permission model), Q53 (secrets seam/refresh), Q59 (locked protections) and Q67 (private preview/cache isolation). Outcome: **one ADR plus a concrete design and verification evidence.** [Q68]
+- **Owner, evidence and block: canonical gate table in the [Specification index](000_index.md#canonical-gate-table)** — coordinated with Q40 (deployment/session/SSR topology, cookies/origins/CSRF, credentials), Q50 (permission model), Q53 (secrets seam/refresh), Q59 (locked protections) and Q67 (private preview/cache isolation). [Q68]
 - **Intended design scope (unresolved here):**
   - mandatory baseline and per-surface profile applicability (cookie / machine-token / public-form) with no exempt routes;
   - permitted auth methods and permitted **sign-in/registration** methods;
@@ -87,7 +87,7 @@ Q68 is **deferred from onboarding by explicit dev decision** and is an **affecte
   - better-auth's default isolate-memory limiter must **not** be assumed distributed/serverless-wide; its own auth protection does not automatically cover custom mutations;
   - preserve CSP/headers/Zod/upload validation and sanitization **without weakening policy** for a UI library (including the `HX-Request`-as-auth non-boundary). [Q50, Q53, Q59, Q68]
 - **Required evidence:** denied undeclared/unprotected surfaces; expired sessions; forbidden origins/CSRF; token/resource permission denials; rate-limit concurrency/storage; first-admin bootstrap; and untrusted upload/content cases. [Q68]
-- **Blockers:** completes before affected auth/security/public-surface implementation **and** before MVP deployment; it does **not** block unrelated implementation whose own gates are satisfied. [Q19, Q60, Q68]
+- **Blockers:** see the canonical gate table — completes before affected auth/security/public-surface implementation **and** before MVP deployment; it does **not** block unrelated implementation whose own gates are satisfied. [Q19, Q60, Q68]
 - **No decision promotion:** this spec does not select any auth method, first-admin mechanism, profile shape, or rate-limit storage/limits. Those are Q68 outcomes only. [Q59, Q68]
 
 ## Adjacent spike links (not owned here)
