@@ -5,15 +5,22 @@
 
 ## Current phase
 
-**Onboarding (baseline) — in progress.** The seven baseline layers + the durable onboarding
-log (`docs/discovery/onboarding.md`) are authored; the run is at the REVIEW → APPROVE →
-COMMIT steps (one scoped `docs(onboarding):` commit, dev-triggered). No plan is active
-(`docs/plans/` is empty). The project is **greenfield / specification stage** — no code exists;
-the nine specs (`docs/specs/000–008`) are the buildable-direction record, not an implementation.
+**Onboarding complete; plan 000 approved, awaiting decomposition.** The seven baseline
+layers and approved onboarding log (`docs/discovery/onboarding.md`) landed in commit `8c49b58`.
+The Trello board and valid `.project/state.json` exist; no plan, phase or task is active.
+Plan 000 is drafted at `docs/plans/000_spike-plan/000_spike-plan.md`, with eight phase
+specifications. Its understanding record validates six ANSWERED / zero OPEN questions. The project is **greenfield / specification stage** — no product code exists;
+the nine specs (`docs/specs/000–008`) state requirements and design gates, not an implementation.
 
-**Immediate next step (for a fresh session):** finish onboarding (review → `/approve-onboard`
-→ `/commit-onboard`) → stand up the Trello board + `.project/state.json` → **`/new-plan`
-spike plan 000** (`docs/plans/000_...`) → run the gates → the MVP plan.
+**Immediate next step (for a fresh session):** `/extract-phases` reconciles the existing
+reviewed phase specifications, then `/extract-tasks` fans out checked task files and TASK
+cards → activation via the Orca bookends → run the design spikes → the MVP implementation
+plan. The dev approved plan 000 via `/approve-plan`; its PLAN card is in To do:
+https://trello.com/c/hs1xvd2A/1-plan-000-yombanink-spike-plan.
+Approval does not activate the plan or approve/execute its phases/tasks. Attempt 1 timed out without a verdict;
+attempt 2 returned PASS-with-findings (no MUST, two SHOULD clarifications), now applied with
+the dev's authorization and mechanically checked, not independently re-reviewed. The
+understanding loop remains zero OPEN. No spike is closed by planning alone.
 
 ## Confirmed decisions (superset: `docs/decisions/0001-platform-foundations.md`)
 

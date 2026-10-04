@@ -14,11 +14,14 @@ can build a full CMS *on top of* the platform by composing modules. The name dra
 
 - Product & repository/domain name: **Yomban.ink** / `yomban.ink` (never bare “Yomban”).
 - Owner / sole maintainer: **Fred Every** (`fred@fredevery.co.za`) — solo project.
-- Status: **greenfield, specification stage** — no code yet. Onboarding baseline authored;
-  the immediate next deliverable is **spike plan 000**.
-- **Current Phase:** Onboarding (baseline) **complete** — seven baseline layers authored +
-  approved (`docs/discovery/onboarding.md` `approved: true`). Next deliverable: **spike plan 000**
-  via `/new-plan` at `docs/plans/000_...`. No plan is active yet.
+- Status: **greenfield, specification stage** — no product code yet. Onboarding is complete;
+  **spike plan 000** is approved (`000_spike-plan.md` `approved: true`), awaiting decomposition.
+- **Current Phase:** Plan 000 planning — understanding settled (six ANSWERED, zero OPEN),
+  dev proceed + Discuss + `/approve-plan` recorded at `docs/plans/000_spike-plan/`.
+  Capped review: PASS-with-findings, no MUST findings; authorized clarifications applied.
+  Next: `/extract-phases` reconciles the existing phase set, then `/extract-tasks` creates
+  checked task files/TASK cards. The approved PLAN card is in To do; no plan is active,
+  no spike has run and no design gate is closed.
 
 ## Doc map (read before coding)
 
@@ -35,7 +38,7 @@ can build a full CMS *on top of* the platform by composing modules. The name dra
 | `docs/discovery/understanding.md` | source | Authoritative discovery record Q1–Q71 (+ amendments 001/002) |
 | `docs/discovery/onboarding.md` | provenance | Durable onboarding log (ADR-0009): §5 groups, layers written, sign-off |
 | `docs/reviews/001_spec-review.md` | review | Independent pre-implementation review (§9 = resolved decisions D1–D5/Q-A, folded) |
-| `docs/plans/` | — | Implementation plans (per-plan dirs `NNN_<name>/`) — **not yet created; spike plan 000 is first** |
+| `docs/plans/000_spike-plan/000_spike-plan.md` + `understanding.md` + `phases/` | plan 000 | Design-spike plan: settled understanding, discussed draft + phase specifications; `tasks/` fan-out and Trello cards follow planning review; no product implementation |
 
 ## Stack
 
