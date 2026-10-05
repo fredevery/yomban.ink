@@ -1,8 +1,8 @@
 ---
 title: Design content workflow semantics
 created_session: '20261005_203953_63d2f4'
-sessions: []
-approved: false
+sessions: ['20261005_204610_dde3e1']
+approved: true
 ---
 
 # Task 2.1 — Design content workflow semantics
