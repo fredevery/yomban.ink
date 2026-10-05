@@ -34,8 +34,11 @@ resource provisioning and closure. **Current state:** Approved via the dev's
 `/approve-plan` invocation (2026-10-04, session `20261004_221017_9e0945`). The final
 budgeted reviewer returned PASS-with-findings, no MUST findings. Authorized SHOULD/source
 clarifications are applied; not independently re-reviewed after the two-attempt cap.
-Understanding is settled and explicit proceed/Discuss recorded. No spike has run, no gate
-is closed and the plan is not active; decomposition is next. See [planning review](planning-review.md).
+Understanding is settled and explicit proceed/Discuss recorded. No spike has run and no
+gate is closed. The plan is now **ACTIVE** — activated via the dev's `/start-plan` invocation
+(2026-10-04, session `20261004_222104_e4336c`): `activePlan` set, PLAN card advanced out of
+To do, `phase_001` prepped as the entry phase. Decomposition (`/extract-phases` then
+`/extract-tasks`) is the next step, ahead of `/start-phase`. See [planning review](planning-review.md).
 
 ## Authority and settled inputs
 
@@ -329,5 +332,10 @@ real behavior again, not borrow the spike's “passed” marker.
 
 ## Task completion summaries
 
-None — planning only. Future completed tasks append a short deliverable/dependency
-summary here in their own scoped close-out; the closure matrix remains explicit.
+- **1.1 — Inventory server/core/headless capabilities:** shipped `designs/q38_capability-inventory.md`
+  (12 capability entries C1–C12, owner/environments/consumers/optionality/missing-behavior/locked-source
+  each) + `evidence/q38_capability-inventory.md` (25 requirement rows → check cases, all results
+  `NOT YET RUN (task 1.2)`), including the two-axis required/optional policy and Q42/Q70/Q71/Q70-MVP
+  coverage. Dev gate decisions recorded: two-axis policy; design tokens NOT a core capability (Q40 owns
+  packaging); PII/erasure = REQUIRED guardrail seams (C12); filesystem = one entry, CLI vs Worker
+  request-local temp. Task 1.2 consumes C1–C12 + the policy and builds/runs the check harness.

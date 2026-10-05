@@ -2,7 +2,7 @@
 title: Inventory server/core/headless capabilities
 created_session: '20261004_222104_e4336c'
 sessions: ['20261004_222804_5a2e0d']
-approved: false
+approved: true
 ---
 
 # Task 1.1 — Inventory server/core/headless capabilities

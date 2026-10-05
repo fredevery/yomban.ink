@@ -5,9 +5,9 @@
     "name": "Yomban.ink",
     "url": "https://trello.com/b/4f1jr3Wk/yombanink"
   },
-  "activePlan": null,
-  "currentPhase": null,
+  "activePlan": "docs/plans/000_spike-plan/000_spike-plan.md",
+  "currentPhase": "phase_001",
   "currentTask": null,
   "currentTaskSummary": null,
-  "lastSessionId": "20261004_221017_9e0945"
+  "lastSessionId": "20261004_222804_5a2e0d"
 }
