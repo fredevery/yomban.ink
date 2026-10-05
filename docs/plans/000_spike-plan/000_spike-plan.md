@@ -212,7 +212,7 @@ Paths below are allocations for future outputs, not links to nonexistent artifac
 
 | Project gate | Design/evidence/harness slug | One design ADR allocation | Principal tasks / closure | Current state |
 |---|---|---|---|---|
-| Q38 | q38_capability-inventory | docs/decisions/0003-core-capability-inventory.md | 1.1–1.3; first phase acceptance | Planned |
+| Q38 | q38_capability-inventory | docs/decisions/0003-core-capability-inventory.md | 1.1–1.3; first phase acceptance | **Closed** (2026-10-05, task 1.3) — design [designs/q38_capability-inventory.md](designs/q38_capability-inventory.md) (§1–§7 inventory/policy accepted; §9 acceptance note); evidence [evidence/q38_capability-inventory.md](evidence/q38_capability-inventory.md) (§4a task-1.2 run; §4b task-1.3 acceptance re-run); ADR [docs/decisions/0003-core-capability-inventory.md](../../decisions/0003-core-capability-inventory.md). Selected mechanism/version: framework-free capability manifest/check harness (`validateModule(manifest, platform)`) at repo-root `spikes/q38_capability-inventory/` — Node v26.8.1, pnpm 12.6.0, TypeScript 5.9.2, Vitest 3.2.4, @biomejs/biome 2.1.4 (versions as observed in the §4b re-run). Dev acceptance: explicit at the task-1.1 dev gate (inventory/policy) and the task-1.3 claim gate ("confirmed…please continue"). Successful verification: the five harness commands re-run from repo root in the acceptance session, each exit 0, `Tests 7 passed (7)` — a failed check would have blocked closure. Dependent reconciliations: none outstanding at closure; recorded scope limits (cross-module C9 collision, dependency cycles, repo-wide scans, real D1/OPFS surfaces) belong to their owning gates (Q35/Q45/Q63/Q70) and are carried in ADR-0003. |
 | Q54 | q54_content-workflows | docs/decisions/0004-content-workflow-semantics.md | 2.1–2.2; 7.7 | Planned |
 | Q63 | q63_persistence-migrations | docs/decisions/0005-database-placement-and-migrations.md | 2.3–2.4; 7.2 | Planned |
 | Q40 | q40_composition-lifecycle | docs/decisions/0006-composition-installation-and-lifecycle.md | 3.1; 6.1–6.2; joint 7.8 | Planned |
@@ -349,3 +349,11 @@ real behavior again, not borrow the spike's “passed” marker.
   result cells + §4a populated with observed outputs, including scope limits for task 1.3 (no cross-module C9
   prefix-collision check, no dependency-cycle detection, per-module validation only). Review: spec + quality
   passes to zero with bounded re-review (PASS, no new defects).
+- **1.3 — Accept Q38 and record first gate closure:** acceptance re-run of all five harness commands from
+  repo root (each exit 0, `Tests 7 passed (7)`; Node 26.8.1, pnpm 12.6.0, TS 5.9.2, Vitest 3.2.4, Biome 2.1.4)
+  recorded in evidence §4b with required-vs-optional reconciliation and explicit dev acceptance; created
+  `docs/decisions/0003-core-capability-inventory.md` (C1–C12 + policy, six rejected alternatives, scope
+  limits, non-decisions); design §9 acceptance note; parent closure matrix: **Q38 → Closed** (first and only
+  Closed gate; all others Planned). Review: two passes to zero (2 should fixed + bounded re-review PASS,
+  2 defer recorded: stale task-file Verification paths → phase-review reconciliation; commit-tag drift).
+  Q35 verification, Q25/Q30, Q37 unblocked per the canonical gate table.

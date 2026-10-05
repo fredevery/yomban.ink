@@ -1,7 +1,7 @@
 ---
 title: Q38 — core capability inventory and required-vs-optional policy (design input)
 created_session: "20261004_223134_6aded7"
-sessions: ["20261004_223134_6aded7", "20261005_132549_49f002"]
+sessions: ["20261004_223134_6aded7", "20261005_132549_49f002", "20261005_171615_b7b002"]
 approved: false
 ---
 
@@ -412,3 +412,13 @@ capability/dependency conformance failure, and built-in/custom parity). The inve
 content of this document (§1–§7) is unchanged. Observed commands, exit codes, pinned versions,
 fixture identity, and diagnostics are recorded in the evidence report §4a:
 `docs/plans/000_spike-plan/evidence/q38_capability-inventory.md`.
+
+## 9. Acceptance note (task 1.3 — session 20261005_171615_b7b002)
+
+The inventory (§1–§7) and the required-vs-optional policy (§3) were **accepted by the dev** and the Q38
+gate **closed** in task 1.3. The five harness verification commands were re-run from repo root in the
+acceptance session — all exit 0, `Tests 7 passed (7)` — with observed outputs, versions and the
+required-vs-optional reconciliation recorded in the evidence report §4b. The accepted record is
+[ADR-0003](../../../decisions/0003-core-capability-inventory.md); the parent plan's gate-closure matrix
+records Q38 as the first Closed gate. No mechanism selection beyond the inventory/policy was made at
+closure (packaging-vs-execution remains Q40's).

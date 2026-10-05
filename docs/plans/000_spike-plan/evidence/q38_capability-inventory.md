@@ -1,7 +1,7 @@
 ---
 title: "Q38 — Core capability inventory and required-vs-optional policy (evidence: requirement → capability/check-case map)"
 created_session: "20261004_224013_192e84"
-sessions: ["20261004_224013_192e84", "20261005_132549_49f002"]
+sessions: ["20261004_224013_192e84", "20261005_132549_49f002", "20261005_171615_b7b002"]
 approved: false
 ---
 
@@ -245,6 +245,65 @@ surfaces (Q45/Q70/Q63). Node/pnpm on this WSL machine: Node v26.8.1, pnpm 12.6.0
 was resolved rather than worked around silently: pnpm 12 initially failed `--frozen-lockfile` install with
 `ERR_PNPM_IGNORED_BUILDS` (esbuild postinstall); fixed via spike-local `pnpm-workspace.yaml`
 `allowBuilds: esbuild: true` + regenerated lockfile (no destructive node_modules operation was used).
+
+## 4b. Acceptance re-run (task 1.3, session 20261005_171615_b7b002) — OBSERVED
+
+> Gate-acceptance layer for task 1.3 (`docs/plans/000_spike-plan/tasks/phase_001/in-progress/task_1.3.md`):
+> the five harness verification commands were re-run from repo root in THIS session before any gate doc was
+> written, per "verify FIRST, docs second". Everything in §4a above is unchanged task-1.2 content; this section
+> records only this session's observed re-run.
+
+**Spec-path drift noted at the claim gate (not silently repaired):** the task file's Verification section
+names `docs/plans/000_spike-plan/spikes/q38_capability-inventory/`, but the harness actually lives at the
+repo-root `spikes/q38_capability-inventory/` (the dev relocated the plan's `spikes/` tree to the repo root
+during task 1.2). The real path was run; the phase spec's command strings are stale on this point and are
+flagged here for dev reconciliation rather than edited mid-task.
+
+**Repo-root commands and cwd** (all invoked from `/home/fred/Development/yomban.ink`; exact strings):
+
+```bash
+pnpm --dir spikes/q38_capability-inventory install --frozen-lockfile
+pnpm --dir spikes/q38_capability-inventory test
+pnpm --dir spikes/q38_capability-inventory typecheck
+pnpm --dir spikes/q38_capability-inventory lint
+pnpm --dir spikes/q38_capability-inventory build
+```
+
+**Observed exit codes (this re-run, in order):** `install --frozen-lockfile` → 0 ("Lockfile is up to date,
+resolution step is skipped; Done in 54ms using pnpm v12.6.0"); `test` → 0; `typecheck` → 0; `lint` → 0
+("Checked 5 files in 6ms. No fixes applied."); `build` → 0 (`tsc`, declaration artifacts into `dist/`,
+untracked-and-ignored).
+
+**Observed test summary (this re-run):** Vitest v3.2.4 — `Test Files 1 passed (1)`, `Tests 7 passed (7)`
+(342ms), matching §4a's final counts: six R14.x behavioral cases plus the malformed empty-facet-list
+hardening test, exercised through representative capabilities (§4b's reconciliation below), not one
+bespoke fixture per case family. No test count is asserted that was not printed by this run.
+
+**Pinned versions (this re-run, from `pnpm list` / runtime, not assumed):** Node v26.8.1; pnpm 12.6.0;
+TypeScript 5.9.2; Vitest 3.2.4; @biomejs/biome 2.1.4. Identical to the §4a run — no dependency moved between
+sessions.
+
+**Required-vs-optional reconciliation (policy §2.2 vs harness coverage):**
+- REQUIRED set (C1 datastore, C5 auth, C6 routing/config/secrets, C8 observability/redaction, C9 identifiers,
+  C10 registry/unit-of-work, C12 PII classification/erasure guardrails) → covered by the harness's
+  missing-REQUIRED semantics (R14.4: a declared REQUIRED seam absent → registration/conformance FAILS, observed
+  loud failure naming C1) plus the valid service-only positive case (R14.1) which declares the minimal REQUIRED
+  set and registers with 0 findings.
+- OPTIONAL/CONDITIONAL set (C2 storage, C3 filesystem, C4 cache, C7 jobs, C11 headless/host) → covered by the
+  absent-OPTIONAL semantics (R14.3: explicit `status: degraded` with a clear diagnostic, never silent).
+- Reconciled per-capability detail stays as §2's R1.x rows; the harness exercises the POLICY mechanics
+  (required-fail vs optional-degrade vs environment-facet vs undeclared vs parity) through representative
+  capabilities rather than one bespoke fixture per C-entry — consistent with the scope limits recorded in §4a
+  (C9 cross-module prefix collision, dependency cycles, and repo-wide dependency-graph/lint sweeps remain
+  unexercised here; productization notes stand).
+
+**Dev acceptance (explicit, at the claim gate):** the dev confirmed proceeding with task 1.3
+("confirmed…please continue") after task 1.2's review; the accepted inventory and required-vs-optional policy
+are those dev-gated in task 1.1 (`docs/plans/000_spike-plan/tasks/phase_001/task_1.1.md` dev gate). The
+accepted record lands in [ADR-0003](../../../decisions/0003-core-capability-inventory.md).
+
+**Gate-closure disposition:** all five commands exit 0 in this session — no failed check blocks closure.
+Q38 is recorded CLOSED in the parent plan's gate-closure matrix with this evidence, the design, and ADR-0003.
 
 ## 5. Limitations / not-yet-established
 
