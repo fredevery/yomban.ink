@@ -5,22 +5,23 @@
 
 ## Current phase
 
-**Onboarding complete; plan 000 approved, awaiting decomposition.** The seven baseline
-layers and approved onboarding log (`docs/discovery/onboarding.md`) landed in commit `8c49b58`.
-The Trello board and valid `.project/state.json` exist; no plan, phase or task is active.
-Plan 000 is drafted at `docs/plans/000_spike-plan/000_spike-plan.md`, with eight phase
-specifications. Its understanding record validates six ANSWERED / zero OPEN questions. The project is **greenfield / specification stage** — no product code exists;
-the nine specs (`docs/specs/000–008`) state requirements and design gates, not an implementation.
+**Plan 000 ACTIVE — phase 001 (Q38 FIRST) tasks 1.1–1.4 executed; pending dev phase
+approval/close.** Q38 — core capability inventory — is **CLOSED** (the first and only
+Closed gate; ADR-0003, design/evidence + repo-root harness `spikes/q38_capability-inventory/`,
+all five harness commands exit 0, `Tests 7 passed (7)`). The phase review (task 1.4) re-ran
+all harness commands and validators (OPEN 0 understanding / valid state / clean diff) and
+recorded phase ADR-0014 (process acceptance; PASS-with-findings, no MUST — harness-path
+drift flagged, scope limits carried, owner/browser/cloud checks N/A). Phase 001's
+close-out edits are uncommitted; the dev's phase approval/close and any phase commit are
+the next Orca verbs. The project remains **greenfield / specification stage** — the spike
+harness is non-product proof code; no product code exists; the nine specs
+(`docs/specs/000–008`) state requirements and design gates, not an implementation.
 
-**Immediate next step (for a fresh session):** `/extract-phases` reconciles the existing
-reviewed phase specifications, then `/extract-tasks` fans out checked task files and TASK
-cards → activation via the Orca bookends → run the design spikes → the MVP implementation
-plan. The dev approved plan 000 via `/approve-plan`; its PLAN card is in To do:
-https://trello.com/c/hs1xvd2A/1-plan-000-yombanink-spike-plan.
-Approval does not activate the plan or approve/execute its phases/tasks. Attempt 1 timed out without a verdict;
-attempt 2 returned PASS-with-findings (no MUST, two SHOULD clarifications), now applied with
-the dev's authorization and mechanically checked, not independently re-reviewed. The
-understanding loop remains zero OPEN. No spike is closed by planning alone.
+**Immediate next step (for a fresh session):** dev-triggered phase approval/close for
+phase 001, then `/start-phase` phase 002 (workflow semantics / Q54 input + Q63 provisional
+designs). See [phase 001](../plans/000_spike-plan/phases/phase_001.md),
+[phase ADR-0014](../decisions/0014-spike-phase-001-review.md) and the parent plan's
+[task summaries + closure matrix](../plans/000_spike-plan/000_spike-plan.md).
 
 ## Confirmed decisions (superset: `docs/decisions/0001-platform-foundations.md`)
 

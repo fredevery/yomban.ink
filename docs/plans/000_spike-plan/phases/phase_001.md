@@ -2,8 +2,8 @@
 title: "Yomban.ink — spike phase 001: Core capability inventory — Q38 FIRST"
 created_session: "20261004_213034_2d1c21"
 sessions: []
-approved: false
-status: Draft
+approved: true
+status: Approved — phase review PASS-with-findings (zero MUST); dev sign-off 2026-10-05 (approve-phase, session 20261005_193123_bf219a); close + phase commit are separate dev-triggered verbs
 ---
 
 # Phase 001 — Core capability inventory — Q38 FIRST

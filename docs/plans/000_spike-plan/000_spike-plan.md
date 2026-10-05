@@ -357,3 +357,17 @@ real behavior again, not borrow the spike's “passed” marker.
   Closed gate; all others Planned). Review: two passes to zero (2 should fixed + bounded re-review PASS,
   2 defer recorded: stale task-file Verification paths → phase-review reconciliation; commit-tag drift).
   Q35 verification, Q25/Q30, Q37 unblocked per the canonical gate table.
+- **1.4 — Phase review and input/closure sign-off:** independent review re-ran all five harness
+  commands from repo root — each exit 0 (`Tests 7 passed (7)`, Vitest 3.2.4; Node 26.8.1,
+  pnpm 12.6.0, TS 5.9.2, Biome 2.1.4) — plus the understanding/state validators (OPEN 0 /
+  state OK) and `git diff --check` (clean). Evidence inspected against acceptance: Q38 stands
+  as the first and only Closed gate, all others Planned; dev acceptance explicit; sanitized
+  evidence matches §4a/§4b. Verdict: **PASS-with-findings, no MUST** — SHOULD: harness-path
+  drift (spec strings name `docs/plans/000_spike-plan/spikes/…`, live harness is repo-root
+  `spikes/q38_capability-inventory/`) flagged for later reconciliation; SHOULD: scope limits
+  (cross-module C9 collision, cycles, real D1/OPFS, repo-wide sweeps) carried per ADR-0003;
+  DEFER: bespoke Q42 R15 fixtures, commit-tag drift. Blocked owner/browser/cloud checks: none
+  in this phase — **N/A**. Created phase review ADR
+  [docs/decisions/0014-spike-phase-001-review.md](../../decisions/0014-spike-phase-001-review.md)
+  (process acceptance only; no design selection). Close-out edits left uncommitted; dev phase
+  approval/close is the next Orca verb.
