@@ -1,7 +1,7 @@
 ---
 title: Q38 — core capability inventory and required-vs-optional policy (design input)
 created_session: "20261004_223134_6aded7"
-sessions: ["20261004_223134_6aded7"]
+sessions: ["20261004_223134_6aded7", "20261005_132549_49f002"]
 approved: false
 ---
 
@@ -400,3 +400,15 @@ or omit it without disabling any non-UI capability (Q30/Q39/Q47).
   no-query-builder abstraction, frontend independence) — Q70/Q71 additions are additive.
 - The dashboard/component-kit/panel/design-token **presentation is not mandatory core**, and
   built-in features are **ordinary modules** on equal footing with custom modules (Q39).
+
+## 8. Execution note (task 1.2 — session 20261005_132549_49f002)
+
+The framework-free capability-check harness described above was **built and run** under
+`spikes/q38_capability-inventory/` (TDD RED→GREEN; a public
+`validateModule(manifest, platform)` entry exercised through real manifest fixtures covering the six
+R14.x behavioral cases of the §3 policy: valid service-only registration, absent-OPTIONAL explicit
+degrade, missing-REQUIRED loud failure, wrong-environment-facet mismatch, undeclared
+capability/dependency conformance failure, and built-in/custom parity). The inventory and policy
+content of this document (§1–§7) is unchanged. Observed commands, exit codes, pinned versions,
+fixture identity, and diagnostics are recorded in the evidence report §4a:
+`docs/plans/000_spike-plan/evidence/q38_capability-inventory.md`.

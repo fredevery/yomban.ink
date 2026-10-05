@@ -339,3 +339,13 @@ real behavior again, not borrow the spike's “passed” marker.
   coverage. Dev gate decisions recorded: two-axis policy; design tokens NOT a core capability (Q40 owns
   packaging); PII/erasure = REQUIRED guardrail seams (C12); filesystem = one entry, CLI vs Worker
   request-local temp. Task 1.2 consumes C1–C12 + the policy and builds/runs the check harness.
+- **1.2 — Prove capability checks and feature independence:** shipped `spikes/q38_capability-inventory/`
+  (relocated from the spec'd `docs/plans/000_spike-plan/spikes/` path by dev decision — live pointers in
+  evidence/design/README reconciled): framework-free TS harness with public `validateModule(manifest, platform)`
+  entry, 7 Vitest tests (TDD RED→GREEN) covering R14.1–R14.6 plus an empty-facet malformed-manifest hardening
+  case; REQUIRED-missing → fail naming the capability, OPTIONAL-missing → explicit degrade, wrong facet →
+  explicit mismatch, undeclared usage/dependency → conformance failure, built-in/custom parity. All five
+  verification commands exit 0 (Node 26.8.1, pnpm 12.6.0, TS 5.9.2, Vitest 3.2.4, Biome 2.1.4); evidence §2
+  result cells + §4a populated with observed outputs, including scope limits for task 1.3 (no cross-module C9
+  prefix-collision check, no dependency-cycle detection, per-module validation only). Review: spec + quality
+  passes to zero with bounded re-review (PASS, no new defects).

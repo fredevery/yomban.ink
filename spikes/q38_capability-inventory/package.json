@@ -1,0 +1,19 @@
+{
+  "name": "@yomban-ink-spike/q38-capability-inventory-harness",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Q38 spike harness: framework-free manifest/capability-check harness proving the required-vs-optional capability policy.",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.4",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  },
+  "packageManager": "pnpm@12.6.0"
+}

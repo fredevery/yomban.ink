@@ -1,8 +1,8 @@
 ---
 title: Prove capability checks and feature independence
 created_session: '20261004_222104_e4336c'
-sessions: []
-approved: false
+sessions: ["20261005_132549_49f002"]
+approved: true
 ---
 
 # Task 1.2 — Prove capability checks and feature independence
