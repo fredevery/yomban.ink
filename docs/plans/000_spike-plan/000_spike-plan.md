@@ -214,7 +214,7 @@ Paths below are allocations for future outputs, not links to nonexistent artifac
 |---|---|---|---|---|
 | Q38 | q38_capability-inventory | docs/decisions/0003-core-capability-inventory.md | 1.1–1.3; first phase acceptance | **Closed** (2026-10-05, task 1.3) — design [designs/q38_capability-inventory.md](designs/q38_capability-inventory.md) (§1–§7 inventory/policy accepted; §9 acceptance note); evidence [evidence/q38_capability-inventory.md](evidence/q38_capability-inventory.md) (§4a task-1.2 run; §4b task-1.3 acceptance re-run); ADR [docs/decisions/0003-core-capability-inventory.md](../../decisions/0003-core-capability-inventory.md). Selected mechanism/version: framework-free capability manifest/check harness (`validateModule(manifest, platform)`) at repo-root `spikes/q38_capability-inventory/` — Node v26.8.1, pnpm 12.6.0, TypeScript 5.9.2, Vitest 3.2.4, @biomejs/biome 2.1.4 (versions as observed in the §4b re-run). Dev acceptance: explicit at the task-1.1 dev gate (inventory/policy) and the task-1.3 claim gate ("confirmed…please continue"). Successful verification: the five harness commands re-run from repo root in the acceptance session, each exit 0, `Tests 7 passed (7)` — a failed check would have blocked closure. Dependent reconciliations: none outstanding at closure; recorded scope limits (cross-module C9 collision, dependency cycles, repo-wide scans, real D1/OPFS surfaces) belong to their owning gates (Q35/Q45/Q63/Q70) and are carried in ADR-0003. |
 | Q54 | q54_content-workflows | docs/decisions/0004-content-workflow-semantics.md | 2.1–2.2; 7.7 | Input ACCEPTED (2026-10-05, task 2.1) — design [designs/q54_content-workflows.md](designs/q54_content-workflows.md) (field kinds/state machine/history/revision checks/save semantics/preview/DOM-host/lock stance); evidence [evidence/q54_content-workflows.md](evidence/q54_content-workflows.md) (§3 dev workflow-INPUT acceptance ACCEPTED; §4 unexecuted checks = task 2.2); ADR-0004 Proposed, not closed. Gate NOT Closed — workflow/evidence tests are task 2.2's. |
-| Q63 | q63_persistence-migrations | docs/decisions/0005-database-placement-and-migrations.md | 2.3–2.4; 7.2 | Planned |
+| Q63 | q63_persistence-migrations | docs/decisions/0005-database-placement-and-migrations.md | 2.3–2.4; 7.2 | Design DELIVERED (2026-10-06, task 2.3) — design [designs/q63_persistence-migrations.md](designs/q63_persistence-migrations.md) (§2 shared-single-D1 placement dev-accepted; §§3–12 namespace/topological ordering/ledger/lock+fencing/retry/data-vs-schema/Drizzle-SQL path/Better-Auth base schema/removal/upgrade; §15 requirement matrix (a)–(l)); evidence [evidence/q63_persistence-migrations.md](evidence/q63_persistence-migrations.md) (§2 dev-accepted placement input; §4 nine UNVERIFIED items = task 2.4); ADR-0005 Proposed, not accepted. Gate NOT Closed — proof is task 2.4; closure is 7.2. |
 | Q40 | q40_composition-lifecycle | docs/decisions/0006-composition-installation-and-lifecycle.md | 3.1; 6.1–6.2; joint 7.8 | Planned |
 | Q47 | q47_client-host-contracts | docs/decisions/0007-client-wire-host-and-presentation.md | 3.2; 6.3; joint 7.8 | Planned |
 | Q46 | q46_public-starter | docs/decisions/0008-public-site-starter.md | 3.3; 6.4; joint 7.8 | Planned |
@@ -332,6 +332,21 @@ real behavior again, not borrow the spike's “passed” marker.
 
 ## Task completion summaries
 
+- **2.3 — Design placement, migration runner and auth integration:** shipped `designs/q63_persistence-migrations.md`
+  (15 sections: shared-single-D1 placement comparison with dev-accepted selection; `core_`-reserved
+  per-module `<ns>_<entity>` namespace with conformance-time collision rejection; topological ordering
+  by the Q36 manifest graph; `core__migrations` ledger batch-committed with its step; `core__migration_lock`
+  TTL-lease + fencing token; step-granularity retry/resume; declared data-vs-schema migration kinds with
+  chunked idempotent data migrations; drizzle-kit-generate-only artifacts executed via the core runner;
+  Better Auth core-owned base schema with required prefixed-TEXT-ID compatibility check (failure blocks
+  auth work); removal retaining data by default; empty/existing-version upgrade behaviour; provisional
+  Q65 recovery requirements; §15 requirement matrix mapping bullets (a)–(l)) +
+  `evidence/q63_persistence-migrations.md` (§2 dev-accepted shared-D1 placement input, 2026-10-06;
+  §4 nine UNVERIFIED items explicitly assigned to task 2.4's real-D1 harness — no unexecuted check
+  asserted as run) + ADR [docs/decisions/0005-database-placement-and-migrations.md](../../decisions/0005-database-placement-and-migrations.md)
+  (Proposed; 12 decisions, 11 rejected alternatives). Q63 still provisional — proof is task 2.4,
+  closure is phase-007 task 7.2. Reviews: two passes to zero (spec: 2 should fixed, bounded re-review
+  PASS; quality: 1 must + 3 should fixed, bounded re-review PASS; 2 defers recorded).
 - **2.1 — Design content workflow semantics:** shipped `designs/q54_content-workflows.md`
   (field kinds text/rich text/media/relation/repeater with stored types inferred from module
   Drizzle schema; draft/review/published/scheduled state machine with legal/illegal tables —
