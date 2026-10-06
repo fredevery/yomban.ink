@@ -52,27 +52,27 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Run Q70 local store/worker/proxy and shared query code against browser SQLite and actual D1.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/package.json
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/README.md
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/vitest.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/wrangler.jsonc
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/schema.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/shared-queries.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/sqlite-worker.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/browser-entry.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/index.html
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/browser-cases.md
+- Create: spikes/q70_local-first-sync/package.json
+- Create: spikes/q70_local-first-sync/pnpm-lock.yaml
+- Create: spikes/q70_local-first-sync/tsconfig.json
+- Create: spikes/q70_local-first-sync/biome.json
+- Create: spikes/q70_local-first-sync/README.md
+- Create: spikes/q70_local-first-sync/src/proof.ts
+- Create: spikes/q70_local-first-sync/src/proof.test.ts
+- Create: spikes/q70_local-first-sync/vitest.config.ts
+- Create: spikes/q70_local-first-sync/wrangler.jsonc
+- Create: spikes/q70_local-first-sync/src/schema.ts
+- Create: spikes/q70_local-first-sync/src/shared-queries.ts
+- Create: spikes/q70_local-first-sync/src/sqlite-worker.ts
+- Create: spikes/q70_local-first-sync/src/browser-entry.ts
+- Create: spikes/q70_local-first-sync/index.html
+- Create: spikes/q70_local-first-sync/browser-cases.md
 - Modify: docs/plans/000_spike-plan/designs/q70_local-first-sync.md
 - Modify: docs/plans/000_spike-plan/evidence/q70_local-first-sync.md
 
 **Acceptance:** TDD worker/proxy request handling then real browser OPFS reload/reopen persistence, one module-owned sqliteTable schema and SAME shared Drizzle query code on server/client, no driver named by module. Actual driver/worker/wasm/OPFS migration compatibility and local transaction data+change-row atomicity; forced failure has neither half persisted. Physical Class 1/Class 2 separation, persist/estimate denial/quota behavior and session/crash/reopen/multi-tab policy checked. WAL requirements from amendment verified on actual chosen driver or blocker surfaced; no in-memory fallback. Browser scripts/dev server/test automation config are explicitly added before running and versions recorded.
 
-**Verification:** Run gates against actual D1 and real browser store; record reload DB/change-row reads and transaction-failure traces. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Record current supported-browser/Safari owner-run evidence with actual versions; emulation does not discharge Safari coverage.
+**Verification:** Run gates against actual D1 and real browser store; record reload DB/change-row reads and transaction-failure traces. From repo root: `pnpm --dir spikes/q70_local-first-sync install --frozen-lockfile`, then `pnpm --dir spikes/q70_local-first-sync test`, `pnpm --dir spikes/q70_local-first-sync typecheck`, `pnpm --dir spikes/q70_local-first-sync lint`, `pnpm --dir spikes/q70_local-first-sync build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Record current supported-browser/Safari owner-run evidence with actual versions; emulation does not discharge Safari coverage.
 
 **Execution notes:** Add browser-tool dependency/config only after verifying installed manifest and official support; exact generated/additional proof paths are written into the task Files before dispatch. Driver/build headers must satisfy Q68 CSP/origin policy, not weaken it.
 
@@ -86,18 +86,18 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Exercise Q70 push/pull/lease/conflict using real local SQLite plus real D1 acceptance.
 **Files:**
-- Modify: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/proof.ts
-- Modify: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/sync.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/sync.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/worker.ts
-- Modify: docs/plans/000_spike-plan/spikes/q70_local-first-sync/browser-cases.md
+- Modify: spikes/q70_local-first-sync/src/proof.ts
+- Modify: spikes/q70_local-first-sync/src/proof.test.ts
+- Create: spikes/q70_local-first-sync/src/sync.ts
+- Create: spikes/q70_local-first-sync/src/sync.test.ts
+- Create: spikes/q70_local-first-sync/src/worker.ts
+- Modify: spikes/q70_local-first-sync/browser-cases.md
 - Modify: docs/plans/000_spike-plan/designs/q70_local-first-sync.md
 - Modify: docs/plans/000_spike-plan/evidence/q70_local-first-sync.md
 
 **Acceptance:** One local action/transaction→one ordered change-set→one D1 batch, aggregate-root child rows inherit state, multi-root edit boundary explicit, FK/local_seq ordering and fail-stop/rejected-visible bucket. Same id/payload dedupe, different payload surfaced, server-derived writes in same batch, rollback whole on permission/stale/constraint failure. Test non-overlapping fields auto-merge, overlapping three-way mine/theirs/both-fork and stale offline reconnect preserving authored data. Leases server-clock expiry/renew/release, no live-other-user steal, same-user device takeover/crash/read-only old device; advisory not atomic correctness. Authorized working-set push/pull/classes, focus/interval/reconnect polling, per-record apply pause/watch/conflict alerts/global status; offline writes are provisional and revoked client ops strand visibly.
 
-**Verification:** RED→GREEN sync/fault tests plus browser two-client traces against real D1; persisted rows, server-derived entries, retries/conflicts and lease takeover match selected policies. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Reuse Q66/Q67/Q68 accepted contracts; test actual implementations through seams, never self-authored canned success responses.
+**Verification:** RED→GREEN sync/fault tests plus browser two-client traces against real D1; persisted rows, server-derived entries, retries/conflicts and lease takeover match selected policies. From repo root: `pnpm --dir spikes/q70_local-first-sync install --frozen-lockfile`, then `pnpm --dir spikes/q70_local-first-sync test`, `pnpm --dir spikes/q70_local-first-sync typecheck`, `pnpm --dir spikes/q70_local-first-sync lint`, `pnpm --dir spikes/q70_local-first-sync build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Reuse Q66/Q67/Q68 accepted contracts; test actual implementations through seams, never self-authored canned success responses.
 
 **Execution notes:** Read the actual selected dependencies and owning specs; record choices/assumptions at the dev gate before changes. Keep outputs scoped and evidence honest.
 
@@ -111,17 +111,17 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Exercise Q70 resilience and Q65 on-device no-resurrection rules on the actual local store.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/resilience.ts
-- Create: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/resilience.test.ts
-- Modify: docs/plans/000_spike-plan/spikes/q70_local-first-sync/browser-cases.md
-- Modify: docs/plans/000_spike-plan/spikes/q70_local-first-sync/src/sqlite-worker.ts
+- Create: spikes/q70_local-first-sync/src/resilience.ts
+- Create: spikes/q70_local-first-sync/src/resilience.test.ts
+- Modify: spikes/q70_local-first-sync/browser-cases.md
+- Modify: spikes/q70_local-first-sync/src/sqlite-worker.ts
 - Modify: docs/plans/000_spike-plan/designs/q70_local-first-sync.md
 - Modify: docs/plans/000_spike-plan/evidence/q70_local-first-sync.md
 - Modify: docs/plans/000_spike-plan/evidence/q65_recovery-erasure.md
 
 **Acceptance:** Payload current+N-1 accepted, too-old client read-only+export, additive-major compatibility and selected one-way local migration with actual pre-migration snapshot/recovery. Tombstone retention AND replica ACK, GC job and explicit purge; deletion propagates to real OPFS when reachable and reconnect denies erased/revoked replay after restore. Offline/unreachable limitations and missing acknowledgements remain visible. Quota/persist refusal/eviction/export/unsynced destructive-action warnings, rebuild safety and local authored-vs-cache loss behavior. No silent loss of rejected/authored ops, restored erased data or preview across accounts.
 
-**Verification:** Run resilience/failure tests and actual browser migrations/snapshot/reconnect/purge cases, then replay Q65 restore scenario against local replica. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q70_local-first-sync build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Record manual supported-browser evidence and residual platform risks; required unsupported behavior blocks closure.
+**Verification:** Run resilience/failure tests and actual browser migrations/snapshot/reconnect/purge cases, then replay Q65 restore scenario against local replica. From repo root: `pnpm --dir spikes/q70_local-first-sync install --frozen-lockfile`, then `pnpm --dir spikes/q70_local-first-sync test`, `pnpm --dir spikes/q70_local-first-sync typecheck`, `pnpm --dir spikes/q70_local-first-sync lint`, `pnpm --dir spikes/q70_local-first-sync build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Record manual supported-browser evidence and residual platform risks; required unsupported behavior blocks closure.
 
 **Execution notes:** Read the actual selected dependencies and owning specs; record choices/assumptions at the dev gate before changes. Keep outputs scoped and evidence honest.
 

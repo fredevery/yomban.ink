@@ -28,7 +28,7 @@ ADR records inventory/policy, rejected alternatives and design/evidence links; d
 
 ## Verification
 
-From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Inspect ADR/design/evidence parity and the parent closure matrix; Q38 must be the first Closed gate.
+From repo root: `pnpm --dir spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir spikes/q38_capability-inventory test`, `pnpm --dir spikes/q38_capability-inventory typecheck`, `pnpm --dir spikes/q38_capability-inventory lint`, `pnpm --dir spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Inspect ADR/design/evidence parity and the parent closure matrix; Q38 must be the first Closed gate.
 
 ## Commits (draft)
 

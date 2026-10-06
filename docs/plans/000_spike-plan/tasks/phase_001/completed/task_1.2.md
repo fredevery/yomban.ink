@@ -18,13 +18,13 @@ its dependency graph.
 
 ## Files
 
-- Create: `docs/plans/000_spike-plan/spikes/q38_capability-inventory/package.json`
-- Create: `docs/plans/000_spike-plan/spikes/q38_capability-inventory/pnpm-lock.yaml`
-- Create: `docs/plans/000_spike-plan/spikes/q38_capability-inventory/tsconfig.json`
-- Create: `docs/plans/000_spike-plan/spikes/q38_capability-inventory/biome.json`
-- Create: `docs/plans/000_spike-plan/spikes/q38_capability-inventory/README.md`
-- Create: `docs/plans/000_spike-plan/spikes/q38_capability-inventory/src/proof.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q38_capability-inventory/src/proof.test.ts`
+- Create: `spikes/q38_capability-inventory/package.json`
+- Create: `spikes/q38_capability-inventory/pnpm-lock.yaml`
+- Create: `spikes/q38_capability-inventory/tsconfig.json`
+- Create: `spikes/q38_capability-inventory/biome.json`
+- Create: `spikes/q38_capability-inventory/README.md`
+- Create: `spikes/q38_capability-inventory/src/proof.ts`
+- Create: `spikes/q38_capability-inventory/src/proof.test.ts`
 - Modify: `docs/plans/000_spike-plan/designs/q38_capability-inventory.md`
 - Modify: `docs/plans/000_spike-plan/evidence/q38_capability-inventory.md`
 
@@ -34,7 +34,7 @@ Write RED tests before the checker. Real manifest inputs cover a valid service-o
 
 ## Verification
 
-From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts.
+From repo root: `pnpm --dir spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir spikes/q38_capability-inventory test`, `pnpm --dir spikes/q38_capability-inventory typecheck`, `pnpm --dir spikes/q38_capability-inventory lint`, `pnpm --dir spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts.
 
 ## Commits (draft)
 

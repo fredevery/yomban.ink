@@ -71,19 +71,19 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Exercise the accepted capability policy through a bounded framework-free manifest/check harness.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q38_capability-inventory/package.json
-- Create: docs/plans/000_spike-plan/spikes/q38_capability-inventory/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q38_capability-inventory/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q38_capability-inventory/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q38_capability-inventory/README.md
-- Create: docs/plans/000_spike-plan/spikes/q38_capability-inventory/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q38_capability-inventory/src/proof.test.ts
+- Create: spikes/q38_capability-inventory/package.json
+- Create: spikes/q38_capability-inventory/pnpm-lock.yaml
+- Create: spikes/q38_capability-inventory/tsconfig.json
+- Create: spikes/q38_capability-inventory/biome.json
+- Create: spikes/q38_capability-inventory/README.md
+- Create: spikes/q38_capability-inventory/src/proof.ts
+- Create: spikes/q38_capability-inventory/src/proof.test.ts
 - Modify: docs/plans/000_spike-plan/designs/q38_capability-inventory.md
 - Modify: docs/plans/000_spike-plan/evidence/q38_capability-inventory.md
 
 **Acceptance:** Write RED tests before the checker. Real manifest inputs cover a valid service-only module, absent optional capability, rejected missing required capability, wrong environment, undeclared dependency/capability and ordinary built-in/custom parity. Test actual checker behavior, not equality against a duplicated expected inventory. No presentation dependencies/binding access. Pin actual tool versions and explicitly supply working scripts/config; src tests are co-located.
 
-**Verification:** From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts.
+**Verification:** From repo root: `pnpm --dir spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir spikes/q38_capability-inventory test`, `pnpm --dir spikes/q38_capability-inventory typecheck`, `pnpm --dir spikes/q38_capability-inventory lint`, `pnpm --dir spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts.
 
 **Execution notes:** The harness exposes a public capability-validation entry and invokes it through both positive/negative manifest fixtures; capture diagnostics and inspect its dependency graph.
 
@@ -104,7 +104,7 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 
 **Acceptance:** ADR records inventory/policy, rejected alternatives and design/evidence links; dev acceptance is explicit. Run checker evidence again, reconcile required-vs-optional cases and update only Q38 to Closed with artifacts/version/acceptance. All other gates remain Planned. A failed check blocks closure.
 
-**Verification:** From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Inspect ADR/design/evidence parity and the parent closure matrix; Q38 must be the first Closed gate.
+**Verification:** From repo root: `pnpm --dir spikes/q38_capability-inventory install --frozen-lockfile`, then `pnpm --dir spikes/q38_capability-inventory test`, `pnpm --dir spikes/q38_capability-inventory typecheck`, `pnpm --dir spikes/q38_capability-inventory lint`, `pnpm --dir spikes/q38_capability-inventory build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Inspect ADR/design/evidence parity and the parent closure matrix; Q38 must be the first Closed gate.
 
 **Execution notes:** Read the actual selected dependencies and owning specs; record choices/assumptions at the dev gate before changes. Keep outputs scoped and evidence honest.
 

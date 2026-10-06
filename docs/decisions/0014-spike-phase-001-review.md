@@ -46,7 +46,7 @@ parent closure matrix.
   continue"); failed-check blocking did not apply (all commands exit 0).
 - **SHOULD — harness-path drift (flagged, not repaired mid-phase):** the phase/task
   spec's Verification strings name
-  `docs/plans/000_spike-plan/spikes/q38_capability-inventory/`, but the harness was
+  `spikes/q38_capability-inventory/`, but the harness was
   created at the repo-root `spikes/q38_capability-inventory/` (dev relocation during
   task 1.2; recorded in evidence §4b and the parent plan's 1.2 summary). Later task
   files citing this harness should use the live repo-root path.

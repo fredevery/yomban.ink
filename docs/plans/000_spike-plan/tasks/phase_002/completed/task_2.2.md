@@ -24,18 +24,18 @@ None — design/evidence or isolated non-product spike harness.
 
 ## Files
 
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/package.json`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/pnpm-lock.yaml`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/tsconfig.json`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/biome.json`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/README.md`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/src/proof.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/src/proof.test.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/vitest.config.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/wrangler.jsonc`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/src/schema.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/drizzle.config.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q54_content-workflows/migrations/README.md`
+- Create: `spikes/q54_content-workflows/package.json`
+- Create: `spikes/q54_content-workflows/pnpm-lock.yaml`
+- Create: `spikes/q54_content-workflows/tsconfig.json`
+- Create: `spikes/q54_content-workflows/biome.json`
+- Create: `spikes/q54_content-workflows/README.md`
+- Create: `spikes/q54_content-workflows/src/proof.ts`
+- Create: `spikes/q54_content-workflows/src/proof.test.ts`
+- Create: `spikes/q54_content-workflows/vitest.config.ts`
+- Create: `spikes/q54_content-workflows/wrangler.jsonc`
+- Create: `spikes/q54_content-workflows/src/schema.ts`
+- Create: `spikes/q54_content-workflows/drizzle.config.ts`
+- Create: `spikes/q54_content-workflows/migrations/README.md`
 - Modify: `docs/plans/000_spike-plan/designs/q54_content-workflows.md`
 - Modify: `docs/plans/000_spike-plan/evidence/q54_content-workflows.md`
 
@@ -52,11 +52,11 @@ propagation/purge/security claims wait for Q66/Q67/Q68.
 
 Run the Q54 harness scripts against actual D1 via Workers Vitest pool; inspect persisted
 rows/history on successful and rejected transitions. From repo root:
-`pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows install --frozen-lockfile`,
-then `pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows test`,
-`pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows typecheck`,
-`pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows lint`,
-`pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows build`; each must exit 0
+`pnpm --dir spikes/q54_content-workflows install --frozen-lockfile`,
+then `pnpm --dir spikes/q54_content-workflows test`,
+`pnpm --dir spikes/q54_content-workflows typecheck`,
+`pnpm --dir spikes/q54_content-workflows lint`,
+`pnpm --dir spikes/q54_content-workflows build`; each must exit 0
 and assert the listed behavioral cases. Record observed outputs/versions in the gate
 evidence report, not assumed test counts.
 

@@ -8,7 +8,7 @@
 ## Context
 
 Task cards under `docs/plans/000_spike-plan/` initially named harness output paths
-inside the plan tree (`docs/plans/000_spike-plan/spikes/<slug>/`). The first committed
+inside the plan tree (`spikes/<slug>/`). The first committed
 spike harness (task 1.2, Q38 capability inventory) instead lives at repo-root
 `spikes/q38_capability-inventory/`. Task 2.2 (Q54 content workflows) hit the same
 conflict at its claim gate.

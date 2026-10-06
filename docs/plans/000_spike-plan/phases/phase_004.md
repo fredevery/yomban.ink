@@ -72,23 +72,23 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Prove the selected Q66 mechanism against actual D1 and appropriate queue/cache boundaries.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/package.json
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/README.md
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/vitest.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/wrangler.jsonc
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/src/schema.ts
-- Create: docs/plans/000_spike-plan/spikes/q66_durable-effects/src/worker.ts
+- Create: spikes/q66_durable-effects/package.json
+- Create: spikes/q66_durable-effects/pnpm-lock.yaml
+- Create: spikes/q66_durable-effects/tsconfig.json
+- Create: spikes/q66_durable-effects/biome.json
+- Create: spikes/q66_durable-effects/README.md
+- Create: spikes/q66_durable-effects/src/proof.ts
+- Create: spikes/q66_durable-effects/src/proof.test.ts
+- Create: spikes/q66_durable-effects/vitest.config.ts
+- Create: spikes/q66_durable-effects/wrangler.jsonc
+- Create: spikes/q66_durable-effects/src/schema.ts
+- Create: spikes/q66_durable-effects/src/worker.ts
 - Modify: docs/plans/000_spike-plan/designs/q66_durable-effects.md
 - Modify: docs/plans/000_spike-plan/evidence/q66_durable-effects.md
 
 **Acceptance:** TDD commit failure, commit-success/enqueue-failure, consumer-crash before/after acknowledgement, duplicate delivery, same-key different payload, purge failure/retry, poison/dead-letter/manual replay, payload N/N-1/rejected-old transitions and external recovery. Verify business rows/effect state and retry/recovery traces; successful business effects are not duplicated, failures stay visible. Mock only intentional external fault seams; actual D1 persistence and real Workers job lifecycle are exercised. Deployed broker/storage semantics needing cloud proof use separately gated synthetic resources, not production.
 
-**Verification:** Execute fault suite and inspect persisted effect/ledger state plus delivery traces. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q66_durable-effects install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q66_durable-effects test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q66_durable-effects typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q66_durable-effects lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q66_durable-effects build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Capture remote job evidence where the selected durability claim exceeds local emulation; unavailable resources block that claim.
+**Verification:** Execute fault suite and inspect persisted effect/ledger state plus delivery traces. From repo root: `pnpm --dir spikes/q66_durable-effects install --frozen-lockfile`, then `pnpm --dir spikes/q66_durable-effects test`, `pnpm --dir spikes/q66_durable-effects typecheck`, `pnpm --dir spikes/q66_durable-effects lint`, `pnpm --dir spikes/q66_durable-effects build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Capture remote job evidence where the selected durability claim exceeds local emulation; unavailable resources block that claim.
 
 **Execution notes:** Read the actual selected dependencies and owning specs; record choices/assumptions at the dev gate before changes. Keep outputs scoped and evidence honest.
 
@@ -122,24 +122,24 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Exercise selected consistency policies locally and with separately gated multi-location deployment evidence.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/package.json
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/README.md
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/vitest.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/wrangler.jsonc
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/src/worker.ts
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/browser-cases.md
-- Create: docs/plans/000_spike-plan/spikes/q67_consistency-preview/remote-cases.md
+- Create: spikes/q67_consistency-preview/package.json
+- Create: spikes/q67_consistency-preview/pnpm-lock.yaml
+- Create: spikes/q67_consistency-preview/tsconfig.json
+- Create: spikes/q67_consistency-preview/biome.json
+- Create: spikes/q67_consistency-preview/README.md
+- Create: spikes/q67_consistency-preview/src/proof.ts
+- Create: spikes/q67_consistency-preview/src/proof.test.ts
+- Create: spikes/q67_consistency-preview/vitest.config.ts
+- Create: spikes/q67_consistency-preview/wrangler.jsonc
+- Create: spikes/q67_consistency-preview/src/worker.ts
+- Create: spikes/q67_consistency-preview/browser-cases.md
+- Create: spikes/q67_consistency-preview/remote-cases.md
 - Modify: docs/plans/000_spike-plan/designs/q67_consistency-preview.md
 - Modify: docs/plans/000_spike-plan/evidence/q67_consistency-preview.md
 
 **Acceptance:** TDD author/public read paths, stale KV pointer, publish/schedule, lost/failed purge with recovery and truthful acknowledgement. Remote synthetic deployment collects actual multiple Cloudflare colo identifiers/time/version reads, proving the selected public bound and distinguishing local/global purge. Browser checks cover unauthorized/session-expired preview, public/shared cache leakage, history restoration after logout/user switch and no private data in wrong contexts. Preliminary provisional presentation is labelled; final selected-library history behavior reruns in Phase 006. Simulated multi-colo cache maps do not alone close Q67.
 
-**Verification:** Run harness gates and fault tests, then record owner-approved remote probe commands, colo/version/timing results and browser versions/screenshots or sanitized traces for every policy case. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q67_consistency-preview install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q67_consistency-preview test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q67_consistency-preview typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q67_consistency-preview lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q67_consistency-preview build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Missing actual multi-location evidence keeps final closure blocked.
+**Verification:** Run harness gates and fault tests, then record owner-approved remote probe commands, colo/version/timing results and browser versions/screenshots or sanitized traces for every policy case. From repo root: `pnpm --dir spikes/q67_consistency-preview install --frozen-lockfile`, then `pnpm --dir spikes/q67_consistency-preview test`, `pnpm --dir spikes/q67_consistency-preview typecheck`, `pnpm --dir spikes/q67_consistency-preview lint`, `pnpm --dir spikes/q67_consistency-preview build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Missing actual multi-location evidence keeps final closure blocked.
 
 **Execution notes:** Present cloud resources/budget/access/teardown before any provisioning/deployment. If no geographic probe access, request explicit owner-run probes rather than claiming simulation proves global behavior.
 
@@ -173,24 +173,24 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Exercise selected Q68 security controls through real request/auth/storage paths.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/package.json
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/README.md
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/vitest.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/wrangler.jsonc
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/src/worker.ts
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/src/auth.ts
-- Create: docs/plans/000_spike-plan/spikes/q68_security-bootstrap/remote-cases.md
+- Create: spikes/q68_security-bootstrap/package.json
+- Create: spikes/q68_security-bootstrap/pnpm-lock.yaml
+- Create: spikes/q68_security-bootstrap/tsconfig.json
+- Create: spikes/q68_security-bootstrap/biome.json
+- Create: spikes/q68_security-bootstrap/README.md
+- Create: spikes/q68_security-bootstrap/src/proof.ts
+- Create: spikes/q68_security-bootstrap/src/proof.test.ts
+- Create: spikes/q68_security-bootstrap/vitest.config.ts
+- Create: spikes/q68_security-bootstrap/wrangler.jsonc
+- Create: spikes/q68_security-bootstrap/src/worker.ts
+- Create: spikes/q68_security-bootstrap/src/auth.ts
+- Create: spikes/q68_security-bootstrap/remote-cases.md
 - Modify: docs/plans/000_spike-plan/designs/q68_security-bootstrap.md
 - Modify: docs/plans/000_spike-plan/evidence/q68_security-bootstrap.md
 
 **Acceptance:** TDD undeclared/unprotected surface rejection, expired session, forbidden origin/CSRF, machine token issuance/revocation/resource denial, malformed requests/untrusted content/uploads and server-validated Turnstile rejection. Real Better Auth/Drizzle/D1 candidate with prefixed IDs; race first-admin bootstrap so no unintended second admin, then provisioning/recovery. Limiter concurrency/shared-storage behavior under actual Workers-safe selected mechanism; remote multiple-isolate proof when distributed claims require it. Q70 push permission failures reject whole sets and pull cannot broaden working set. Evidence covers API and HTML, not navigation gating alone.
 
-**Verification:** Run negative/positive auth/security suite with actual request entrypoints and inspect DB/storage/permission outcomes. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q68_security-bootstrap install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q68_security-bootstrap test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q68_security-bootstrap typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q68_security-bootstrap lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q68_security-bootstrap build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Record owner-gated distributed limiter and public-form verification evidence; mocked Turnstile HTTP alone is preliminary, not successful live verification.
+**Verification:** Run negative/positive auth/security suite with actual request entrypoints and inspect DB/storage/permission outcomes. From repo root: `pnpm --dir spikes/q68_security-bootstrap install --frozen-lockfile`, then `pnpm --dir spikes/q68_security-bootstrap test`, `pnpm --dir spikes/q68_security-bootstrap typecheck`, `pnpm --dir spikes/q68_security-bootstrap lint`, `pnpm --dir spikes/q68_security-bootstrap build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Record owner-gated distributed limiter and public-form verification evidence; mocked Turnstile HTTP alone is preliminary, not successful live verification.
 
 **Execution notes:** Never read existing credential files. Owner provisioned disposable credentials are environment-only; logs/results are sanitized before retaining evidence.
 
@@ -224,24 +224,24 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Prove Q65 recovery of actual D1 records and referenced assets, including replica safety scenarios.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/package.json
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/README.md
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/vitest.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/wrangler.jsonc
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/src/worker.ts
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/restore-runbook.md
-- Create: docs/plans/000_spike-plan/spikes/q65_recovery-erasure/erasure-cases.md
+- Create: spikes/q65_recovery-erasure/package.json
+- Create: spikes/q65_recovery-erasure/pnpm-lock.yaml
+- Create: spikes/q65_recovery-erasure/tsconfig.json
+- Create: spikes/q65_recovery-erasure/biome.json
+- Create: spikes/q65_recovery-erasure/README.md
+- Create: spikes/q65_recovery-erasure/src/proof.ts
+- Create: spikes/q65_recovery-erasure/src/proof.test.ts
+- Create: spikes/q65_recovery-erasure/vitest.config.ts
+- Create: spikes/q65_recovery-erasure/wrangler.jsonc
+- Create: spikes/q65_recovery-erasure/src/worker.ts
+- Create: spikes/q65_recovery-erasure/restore-runbook.md
+- Create: spikes/q65_recovery-erasure/erasure-cases.md
 - Modify: docs/plans/000_spike-plan/designs/q65_recovery-erasure.md
 - Modify: docs/plans/000_spike-plan/evidence/q65_recovery-erasure.md
 
 **Acceptance:** Use synthetic populated Q63 migration/schema fixture with referenced media objects. Export D1 and protected copies, remove/corrupt primary records/assets in disposable gated resources, restore both into clean targets and verify identity/reference/content digests with tool-calculated hashes. Exercise relevant migration/media failure recovery, retained removal, primary-copy loss and access isolation. Test erasure before/after backup restore and replay, online/reconnecting/offline/revoked replica policies, retained tombstone ACK/GC and explicit purge; no silent record resurrection. Browser-local cases are provisional until Phase 005 real OPFS rerun.
 
-**Verification:** Run actual chosen export/copy/restore commands, record timings/count/digest/reference checks and failure recovery. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q65_recovery-erasure install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q65_recovery-erasure test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q65_recovery-erasure typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q65_recovery-erasure lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q65_recovery-erasure build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Remote protected-copy/isolation properties require separately gated real resource evidence; local R2/D1 simulations are labelled, not proof of disaster recovery access isolation.
+**Verification:** Run actual chosen export/copy/restore commands, record timings/count/digest/reference checks and failure recovery. From repo root: `pnpm --dir spikes/q65_recovery-erasure install --frozen-lockfile`, then `pnpm --dir spikes/q65_recovery-erasure test`, `pnpm --dir spikes/q65_recovery-erasure typecheck`, `pnpm --dir spikes/q65_recovery-erasure lint`, `pnpm --dir spikes/q65_recovery-erasure build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Remote protected-copy/isolation properties require separately gated real resource evidence; local R2/D1 simulations are labelled, not proof of disaster recovery access isolation.
 
 **Execution notes:** Cloud restore never uses production data/resources. Owner verifies resource names, costs and teardown. Record evidence blockers and privacy limits instead of marking missing device checks complete.
 
