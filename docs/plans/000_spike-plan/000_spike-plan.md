@@ -343,6 +343,22 @@ real behavior again, not borrow the spike's “passed” marker.
   `evidence/q54_content-workflows.md` (traceability matrix to 005 §§6/8 R1–R11, Q42/Q54/Q58,
   Amendment 001; §3 dev workflow-INPUT acceptance ACCEPTED at the approve gate; §4 unexecuted
   checks = task 2.2) + ADR [docs/decisions/0004-content-workflow-semantics.md](../../decisions/0004-content-workflow-semantics.md)
+- **2.2 — Prove workflow transitions and optimistic saves:** shipped the real-D1 spike
+  harness `spikes/q54_content-workflows/` (location per ADR-0015, dev-decided at claim;
+  repo-root `spikes/` convention) — Drizzle fixture schema (aggregate-root records with
+  prefixed TEXT ids, append-only revisions + history events, media fixture records), a
+  WorkflowEngine proving designs §§2–9 (all five field kinds, legal/illegal transitions,
+  scheduled + post-publish revision history, failed-publish-as-EVENT, atomic conditional-UPDATE
+  optimistic saves, truthful acknowledgement, permission-gated preview, media/relation
+  ownership) — 21 TDD tests passing against real D1 via vitest-pool-workers 0.8.19 +
+  vitest 3.1.4 (inside vpw's supported range; corrected at review), drizzle-kit-generated
+  fixture migrations (`migrations/0000_wise_unicorn.sql` + `meta/`); all five verification
+  commands exit 0 from repo root (Node 26.8.1, pnpm 12.6.0, TS 5.9.2). Design §14 conformance
+  note + evidence §5 execution record (observed outputs, TDD RED-first, location + vpw-version
+  deviations logged). Reviews: spec pass PASS→fixed→re-review PASS; code-quality PASS→7 fixes
+  →re-review PASS, no new defects. Q54 workflow INPUT accepted and now exercised by tests;
+  Q63 still provisional pending 2.3/2.4. Created ADR
+  [docs/decisions/0015-spike-harness-location.md](../../decisions/0015-spike-harness-location.md).
   (Proposed, not closed). Review: two passes to zero (spec: 2 should fixed + 2 defer recorded,
   bounded re-review PASS; quality: 3 should + 2 defer fixed, bounded re-review PASS).
   Q54 INPUT accepted; Q40/Q47 may consume it; the GATE itself closes at task 2.2/7.7.

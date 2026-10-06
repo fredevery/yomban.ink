@@ -132,3 +132,65 @@ test deliverable) unless another owner is named:
 
 Executed in this task: document reading (the sources in §1), design authoring, ADR authoring
 and this report — nothing else. No tool ran tests, migrations or harness commands.
+
+## 5. Task 2.2 — harness execution evidence (observed outputs)
+
+**Harness:** `spikes/q54_content-workflows/` — a standalone non-product fixture harness.
+**Location note:** the task card's Files list named
+`docs/plans/000_spike-plan/spikes/q54_content-workflows/`; the dev directed the harness to
+live at repo-root `spikes/q54_content-workflows/` instead, matching the committed task-1.2
+harness convention (`spikes/q38_capability-inventory/`). All other Files honoured.
+
+**TDD:** tests were authored first (RED: 21 failing), then the engine implemented to GREEN.
+
+**Stack (pinned in `package.json`, `pnpm-lock.yaml` committed):** typescript 5.9.2,
+drizzle-orm 0.45.3 + drizzle-kit 0.31.11 (D1/SQLite dialect), wrangler 4.147.0,
+vitest 3.1.4 + @cloudflare/vitest-pool-workers 0.8.19 (real D1 via Miniflare; 0.8.19's
+supported vitest range is 2.0.x–3.1.x — 3.1.4 pinned to stay inside it),
+@biomejs/biome 2.1.4, @cloudflare/workers-types 4.20250505.0. Runtime: node v26.8.1,
+pnpm 12.6.0.
+
+**Fixture migrations (Drizzle-generated, exact paths):**
+- `spikes/q54_content-workflows/migrations/0000_wise_unicorn.sql`
+- `spikes/q54_content-workflows/migrations/meta/_journal.json`
+- `spikes/q54_content-workflows/migrations/meta/0000_snapshot.json`
+
+Generated with `pnpm --dir spikes/q54_content-workflows generate` (drizzle-kit) from
+`src/schema.ts`; applied at test setup via `readD1Migrations` + `applyD1Migrations`
+against the local Miniflare D1 binding (`DB` in `wrangler.jsonc`, never deployed).
+
+**Verification commands (from repo root, all exit 0, observed 2026-10-05):**
+
+| Command | Exit | Observed result |
+|---|---|---|
+| `pnpm --dir spikes/q54_content-workflows install --frozen-lockfile` | 0 | "Lockfile is up to date" |
+| `pnpm --dir spikes/q54_content-workflows test` | 0 | `Test Files 1 passed (1)` / `Tests 21 passed (21)` |
+| `pnpm --dir spikes/q54_content-workflows typecheck` | 0 | `tsc --noEmit` clean |
+| `pnpm --dir spikes/q54_content-workflows lint` | 0 | `biome check .` clean |
+| `pnpm --dir spikes/q54_content-workflows build` | 0 | `tsc` clean |
+
+**Behavioural cases asserted against real D1 (persisted-row inspection on success and
+rejection):** every field kind round-trips (text/rich_text/media/relation/repeater);
+legal transitions draft→review→published (revision 1), review rejection → draft with
+feedback, published→scheduled via a revision, scheduled→published at schedule time;
+illegal transitions rejected (draft→published review-gate skip, schedule without future
+time, publish-in-place, draft revision rows); append-only revision history with a
+post-publish revision appending revision 2 while revision 1 stays intact; failed publish
+retains pre-attempt state + records an EVENT (not a revision row); stale-base and
+concurrent saves rejected server-side (atomic conditional UPDATE, exactly one winner,
+newer data preserved, rejection never reported as success); late/failed saves leave the
+server record untouched and never claim publish success; preview denied for public role
+and expired sessions; media/relation ownership denials.
+
+**Scope limits honoured:** no product migration runner, no media pipeline, no UI, no
+external propagation/purge/security claims. Q66/Q67/Q68 guarantees remain named-not-
+proven; the fixture migration path is provisional evidence, **not** Q63 closure (task
+2.3/2.4 own that).
+
+**Note on vitest-pool-workers version:** 0.22.x prerelease replaced the pool with a new
+plugin API; the harness pins the last stable 0.8.x line (0.8.19) paired with vitest 3.1.4 —
+inside vpw 0.8.19's officially supported vitest range (2.0.x–3.1.x; the initial 3.2.4 pin
+sat outside it and was corrected during review). Per the platform stack's
+`@cloudflare/vitest-pool-workers` lock. `wrangler.jsonc`'s compatibility_date was
+pinned to 2025-04-17 (the installed Workers runtime's supported date) during review —
+the earlier 2025-05-05 date triggered a Miniflare fallback warning.

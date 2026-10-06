@@ -1,8 +1,8 @@
 ---
 title: Prove workflow transitions and optimistic saves
 created_session: '20261005_203953_63d2f4'
-sessions: []
-approved: false
+sessions: ["20261005_221941_20df22"]
+approved: true
 ---
 
 # Task 2.2 — Prove workflow transitions and optimistic saves

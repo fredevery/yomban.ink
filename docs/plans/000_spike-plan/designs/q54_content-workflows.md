@@ -280,3 +280,15 @@ search API, index or UI is designed or committed here.
     live and the open revision never auto-publishes.
 - No workflow/evidence tests: the harness/tests that exercise R1–R4 etc. are **task 2.2's**
   deliverable and are **NOT YET RUN**.
+
+## 14. Harness conformance note (task 2.2)
+
+The task 2.2 harness (`spikes/q54_content-workflows/`, per the dev's location decision —
+repo-root `spikes/` convention, matching the committed 1.2 harness) implements **exactly
+the semantics specified above** with no amendment: the §3.2/§3.3 transition tables, §4
+append-only revision/event history and failed-publish event behaviour, §6 server-side
+optimistic revision checks (stale/concurrent rejection preserving newer data), §7 truthful
+save/publish acknowledgement, §9 permission-gated preview and the Q58 media/relation
+ownership stance all pass as real-D1 behavioural tests (see the evidence report §5). No
+design element was changed to make the proofs pass; nothing here selects a presentation
+mechanism or invents Q66/Q67 mechanics.
