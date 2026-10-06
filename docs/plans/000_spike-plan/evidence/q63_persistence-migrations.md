@@ -103,11 +103,14 @@ design document and is task 2.4's required evidence under the phase-002 contract
    generation via the Better Auth CLI, adapter schema-mapping options (`usePlural`,
    schema mapping) for `core_`-prefixed tables, and **executed supported auth flows
    with stored-ID/schema inspection** proving core-seam-generated entity-prefixed
-   TEXT IDs on every auth entity and FK — no integer/unprefixed fallback. Also
-   unverified this session: the **exact CLI commands/flags and adapter option
-   surface for the pinned better-auth version** (docs consulted were the current
-   public docs; the pinned-version check is task 2.4's). **No package was installed
-   and no API was proven here.**
+   prefixed TEXT IDs on every auth entity and FK — no integer/unprefixed fallback. Also
+     unverified this session: the **exact CLI commands/flags and adapter option
+     surface for the pinned better-auth version** (docs consulted were the current
+     public docs; the pinned-version check is task 2.4's). **No package was installed
+     and no API was proven here.** → **All items now PROVEN by task 2.4 (evidence §6,
+     2026-10-06):** the §4 items 1–8 were exercised on real D1 with 14/14 tests and the
+     full gate exit 0; item 9 (D1 batch-size calibration for large migrations) remains
+     for phase 7 reconciliation.
 9. **D1 batch-size limits vs large migrations** (§7): the step-chunking bound must
    be calibrated to observed D1 limits in the harness.
 
@@ -126,3 +129,61 @@ Modifies this design and evidence report with observed outputs. Per the phase fi
 RED tests for adapter persistence, upgrade/collision/replay/concurrency first; Q65
 restore of these fixtures follows in Phase 004; **Q63 final acceptance waits for 7.2
 (reconciliation)** — neither task 2.4 nor this design closes the gate.
+
+## 6. Task 2.4 — observed real-D1 outputs (2026-10-06, session 20261006_171549_8fe055)
+
+The harness was built and the full gate **actually run** (observed, not assumed):
+
+| Gate (from repo root) | Observed result |
+|---|---|
+| `pnpm --dir spikes/q63_persistence-migrations install --frozen-lockfile` | exit 0 — "Lockfile is up to date, resolution step is skipped" (pnpm 12.6.0) |
+| `pnpm --dir spikes/q63_persistence-migrations test` | exit 0 — **Test Files 2 passed (2); Tests 14 passed (14)** (vitest 3.1.4 + @cloudflare/vitest-pool-workers 0.8.19, real Miniflare D1): `src/proof.test.ts` 10 migration-runner tests + `src/auth.test.ts` 4 Better Auth tests |
+| `pnpm --dir spikes/q63_persistence-migrations typecheck` | exit 0 — `tsc --noEmit` clean |
+| `pnpm --dir spikes/q63_persistence-migrations lint` | exit 0 — biome check, "Checked 10 files" |
+| `pnpm --dir spikes/q63_persistence-migrations build` | exit 0 — `tsc` emit clean |
+
+**Pinned versions** (harness `package.json` + `pnpm-lock.yaml`, installed): better-auth
+**1.3.27**, drizzle-orm **0.45.3**, drizzle-kit **0.31.11**, vitest **3.1.4**,
+@cloudflare/vitest-pool-workers **0.8.19**, typescript **5.9.2**, biome **2.1.4**,
+wrangler **4.147.0**.
+
+**Migration-generation command + generated path list (recorded):**
+
+- Command: `npx drizzle-kit generate` (drizzle.config.ts: `dialect: 'sqlite'`,
+  `schema: './src/schema.ts'`, `out: './migrations'`).
+- Output: "4 tables — core_account 13 columns 0 indexes 1 fks / core_session 8 columns
+  1 indexes 1 fks / core_user 7 columns 1 indexes 0 fks / core_verification 6 columns
+  0 indexes 0 fks" → generated `migrations/0000_luxuriant_virginia_dare.sql` +
+  `migrations/meta/` (journal + snapshots).
+- Generated DDL: every `core_*` table has `id text PRIMARY KEY NOT NULL`; FK columns
+  `user_id text NOT NULL ... REFERENCES core_user(id)` — **no INTEGER primary key**.
+
+**Proven migration behaviours (task 2.3 §4 unverified items → now exercised on real D1):**
+per-step batch atomicity with the ledger row in the same batch; lock mutual exclusion +
+fencing token; retry after injected failure with safe ledger state; collision/dependency
+ordering; empty-DB and existing-version runs; data-migration chunked resumability; module
+removal retaining data. (Item 9 of §4 — D1 batch-size calibration for large migrations —
+remains out of the harness's calibrated scope; surfaced to phase 7 reconciliation.)
+
+**Better Auth stored-ID inspection (actual D1 rows + sqlite_master DDL, real flows):**
+
+- Rows observed after sign-up + sign-in:
+  `core_user: [{"id":"usr_01m4946z679tv4bjtaebpc"}]`;
+  `core_session: [{"id":"ses_01m4946z6t6gz1wr72xhqg","user_id":"usr_01m4946z679tv4bjtaebpc"}, …]`;
+  `core_account: [{"id":"acct_01m4946z6ka09bfrbgm3cg","user_id":"usr_01m4946z679tv4bjtaebpc"}]`.
+- sqlite_master DDL for all four `core_*` tables: `id TEXT PRIMARY KEY`; FK columns TEXT —
+  no INTEGER keys. Test asserts `INTEGER PRIMARY KEY` absent and `id TEXT PRIMARY KEY`
+  present per table.
+- API-returned `user.id` matches the stored row id exactly (`usr_01m4946z679tv4bjtaebpc`).
+
+**PROVISIONAL ID scheme pinned (pending Q40):** `<entity prefix>_<sortable material>` —
+`usr_` / `ses_` / `acct_` / `vrf_` + base32 monotonic-timestamp (10 chars) + random tail
+(12 chars). Recorded in the harness README + `src/schema.ts` (`idMaterial()`); re-run at
+plan reconciliation with the final selected ID and Q68 flows.
+
+**Design updates driven by findings (design §9 amended):** adapter schema map is keyed by
+Better Auth model names; timestamps declared `integer({ mode: 'timestamp' })` (better-auth
+passes `Date` objects; D1 rejects object binds); `bearer()` plugin required for
+server-side token session reads.
+
+**Blockers:** none — no compatibility failure blocked auth work.

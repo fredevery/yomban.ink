@@ -1,0 +1,13 @@
+{
+  // Q63 spike harness — local (Miniflare) D1 only; never deployed.
+  "name": "q63-persistence-migrations-spike",
+  "main": "src/proof.ts",
+  "compatibility_date": "2025-04-17",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "q63-spike-local",
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ]
+}

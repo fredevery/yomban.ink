@@ -1,0 +1,28 @@
+{
+  "name": "@yomban-ink-spike/q63-persistence-migrations-harness",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Q63 spike harness: real-D1 migration-runner mechanics + Better Auth prefixed TEXT ID proofs (non-product evidence).",
+  "type": "module",
+  "scripts": {
+    "generate": "drizzle-kit generate",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "better-auth": "1.3.27",
+    "drizzle-orm": "0.45.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.4",
+    "@cloudflare/vitest-pool-workers": "0.8.19",
+    "@cloudflare/workers-types": "4.20250505.0",
+    "drizzle-kit": "0.31.11",
+    "typescript": "5.9.2",
+    "vitest": "3.1.4",
+    "wrangler": "4.147.0"
+  },
+  "packageManager": "pnpm@12.6.0"
+}

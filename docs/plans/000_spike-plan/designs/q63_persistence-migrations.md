@@ -220,17 +220,29 @@ fencing token**:
   names mapped (Better Auth's Drizzle adapter supports passing a schema object with table
   mappings, and `usePlural` for plural table names — per its docs; exact option set verified
   against the pinned adapter version is **task 2.4's** check, recorded then).
-- **Prefixed TEXT IDs — the required compatibility check (Q11/Q63):** every Better Auth entity
-  (user, session, account, verification, …) uses a **core-seam-generated, entity-prefixed,
-  sortable, URL-safe TEXT id** — e.g. `au_user_…`, never INTEGER, never unprefixed. The
-  adapter must accept platform-generated IDs for auth entities, verified **by executing
-  supported auth flows and inspecting the actual stored IDs/schema** — not by a generateId
-  unit test alone (task-card acceptance for 2.4). A failed compatibility check **blocks auth
-  work and is surfaced to the dev**; it is never silently resolved by falling back to integer
-  or unprefixed IDs (Q11/`003`).
+- **Prefixed TEXT IDs — the required compatibility check (Q11/Q63): PROVEN by task 2.4**
+  (evidence report §6). The harness configured better-auth 1.3.27's `drizzleAdapter` over
+  real D1 with `advanced.database.generateId` emitting `<entity prefix>_<sortable material>`
+  (`usr_` / `ses_` / `acct_` / `vrf_` + base32 monotonic-timestamp + random tail —
+  **PROVISIONAL core-seam candidate pending Q40**). Sign-up / sign-in / session read ran
+  through the adapter with no adapter mocks; stored D1 rows and sqlite_master DDL were
+  inspected directly: every entity id and every FK column (`core_session.user_id`,
+  `core_account.user_id`) is prefixed sortable TEXT — **no INTEGER primary key and no
+  unprefixed fallback anywhere**. The adapter accepts the schema object keyed by the
+  Better Auth model names (`user`, `session`, `account`, `verification`) mapping to the
+  `core_`-prefixed Drizzle tables; `usePlural: false`. The `au_user_…` example above is
+  illustrative — the harness pinned the shorter `usr_/ses_/acct_/vrf_` scheme.
 - **Version pinning:** the adapter/auth CLI versions are pinned in the task 2.4 harness
   (`package.json` + lockfile); behaviour claims in the design cite official docs at the time
   of writing and are re-verified against the pinned versions during that task.
+- **Task 2.4 findings folded into §9:** (a) better-auth 1.3.27's `drizzleAdapter` resolves
+  models by the Better Auth model name, so the schema map is keyed `user`/`session`/
+  `account`/`verification` with `core_`-prefixed Drizzle tables as values (the `modelName`
+  fallback exists for custom keys — unnecessary here); (b) timestamps must be declared
+  `integer(..., { mode: 'timestamp' })` — better-auth passes `Date` objects and D1 rejects
+  object binds into TEXT columns; (c) server-side session reads over a raw token require
+  better-auth's `bearer()` plugin (converts `Authorization: Bearer` into the signed
+  session cookie).
 
 ## 10. Module removal with data retention
 
@@ -347,7 +359,7 @@ and the task-card acceptance wording) mapped to the design section that resolves
 | Q40 wiring participation (referenced, not designed) | §1, §6 (deploy serialization deferred), §9 (id-service seam), §14 |
 | Unit-of-work atomicity respected (one D1 DB + one batch; no distributed claims) | §2.2, §5, §7, §8, §12; cross-DB/R2/queue effects excluded (Q52/Q66) |
 | Identity never INTEGER/unprefixed (Q11) — Better Auth included | §9 (prefixed TEXT IDs; failure blocks auth work, surfaced to dev) |
-| Better Auth prefixed-TEXT-ID compatibility as required evidence (flows + stored IDs) | §9; proof = task 2.4, not yet run (evidence §4) |
+| Better Auth prefixed-TEXT-ID compatibility as required evidence (flows + stored IDs) | §9; **proven by task 2.4** (evidence §6, 2026-10-06) |
 
 **Matrix completeness note:** the design's labels (a)–(l) cover every bullet of `003` §Q63's
 "Intended design scope" list — rows (k) and (l) additionally absorb the "Required evidence"

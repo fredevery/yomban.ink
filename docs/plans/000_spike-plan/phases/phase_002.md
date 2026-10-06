@@ -72,24 +72,24 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Execute bounded non-UI workflow proofs against real D1 and retain accepted workflow input.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/package.json
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/README.md
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/vitest.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/wrangler.jsonc
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/src/schema.ts
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/drizzle.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q54_content-workflows/migrations/README.md
+- Create: spikes/q54_content-workflows/package.json
+- Create: spikes/q54_content-workflows/pnpm-lock.yaml
+- Create: spikes/q54_content-workflows/tsconfig.json
+- Create: spikes/q54_content-workflows/biome.json
+- Create: spikes/q54_content-workflows/README.md
+- Create: spikes/q54_content-workflows/src/proof.ts
+- Create: spikes/q54_content-workflows/src/proof.test.ts
+- Create: spikes/q54_content-workflows/vitest.config.ts
+- Create: spikes/q54_content-workflows/wrangler.jsonc
+- Create: spikes/q54_content-workflows/src/schema.ts
+- Create: spikes/q54_content-workflows/drizzle.config.ts
+- Create: spikes/q54_content-workflows/migrations/README.md
 - Modify: docs/plans/000_spike-plan/designs/q54_content-workflows.md
 - Modify: docs/plans/000_spike-plan/evidence/q54_content-workflows.md
 
 **Acceptance:** TDD real-D1 workflow/field fixtures: each field kind, valid/invalid transitions, scheduled and post-publish revision history, stale revision/concurrent save denial preserving newer data, failed/late saves not claiming publish success, resource-permission/preview denials and media/relation ownership. Use Drizzle-generated fixture migrations and the explicitly documented proof path; no product migration runner or media pipeline ships. External propagation/purge/security claims wait for Q66/Q67/Q68.
 
-**Verification:** Run the Q54 harness scripts against actual D1 via Workers Vitest pool; inspect persisted rows/history on successful and rejected transitions. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q54_content-workflows build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts.
+**Verification:** Run the Q54 harness scripts against actual D1 via Workers Vitest pool; inspect persisted rows/history on successful and rejected transitions. From repo root: `pnpm --dir spikes/q54_content-workflows install --frozen-lockfile`, then `pnpm --dir spikes/q54_content-workflows test`, `pnpm --dir spikes/q54_content-workflows typecheck`, `pnpm --dir spikes/q54_content-workflows lint`, `pnpm --dir spikes/q54_content-workflows build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts.
 
 **Execution notes:** Generate migration artifacts with the pinned Drizzle tooling, list exact generated paths before execution, and capture real failure output. The local fixture migration path is provisional evidence, not Q63 closure.
 
@@ -123,26 +123,30 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Exercise the selected Drizzle/D1 adapter and migration candidate under actual Workers/D1 behavior.
 **Files:**
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/package.json
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/pnpm-lock.yaml
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/tsconfig.json
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/biome.json
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/README.md
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/proof.ts
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/proof.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/vitest.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/wrangler.jsonc
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/drizzle.config.ts
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/schema.ts
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/auth.ts
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/auth.test.ts
-- Create: docs/plans/000_spike-plan/spikes/q63_persistence-migrations/migrations/README.md
+- Create: spikes/q63_persistence-migrations/package.json
+- Create: spikes/q63_persistence-migrations/pnpm-lock.yaml
+- Create: spikes/q63_persistence-migrations/pnpm-workspace.yaml
+- Create: spikes/q63_persistence-migrations/tsconfig.json
+- Create: spikes/q63_persistence-migrations/biome.json
+- Create: spikes/q63_persistence-migrations/README.md
+- Create: spikes/q63_persistence-migrations/src/proof.ts
+- Create: spikes/q63_persistence-migrations/src/proof.test.ts
+- Create: spikes/q63_persistence-migrations/src/env.d.ts
+- Create: spikes/q63_persistence-migrations/src/test-setup.ts
+- Create: spikes/q63_persistence-migrations/vitest.config.ts
+- Create: spikes/q63_persistence-migrations/wrangler.jsonc
+- Create: spikes/q63_persistence-migrations/drizzle.config.ts
+- Create: spikes/q63_persistence-migrations/src/schema.ts
+- Create: spikes/q63_persistence-migrations/src/auth.ts
+- Create: spikes/q63_persistence-migrations/src/auth.test.ts
+- Create: spikes/q63_persistence-migrations/migrations/README.md
+- Create: spikes/q63_persistence-migrations/migrations/<generated>.sql + meta/ (actual paths recorded at generation)
 - Modify: docs/plans/000_spike-plan/designs/q63_persistence-migrations.md
 - Modify: docs/plans/000_spike-plan/evidence/q63_persistence-migrations.md
 
 **Acceptance:** Real D1: empty/existing-version migration, collisions/dependency ordering, replay/retry after injected failure and simultaneous deploy attempts with safe ledger state, schema-vs-data upgrade and module removal retaining data. Better Auth generates required schema and executes supported auth flows through its selected Drizzle/D1 adapter with core-seam-generated entity-prefixed sortable TEXT IDs across every created auth entity and FK. No integer/unprefixed fallback; inspect actual stored IDs/schema, not just a generateId unit test. Pin temporary core-seam ID candidate as provisional pending Q40; final selected ID and Q68 flows are rerun at reconciliation.
 
-**Verification:** Run actual schema-generation/migration commands (record exact command/output and generated path list) plus real-D1 tests. From repo root: `pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations install --frozen-lockfile`, then `pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations test`, `pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations typecheck`, `pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations lint`, `pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Failed compatibility blocks auth work and is surfaced to the dev.
+**Verification:** Run actual schema-generation/migration commands (record exact command/output and generated path list) plus real-D1 tests. From repo root: `pnpm --dir spikes/q63_persistence-migrations install --frozen-lockfile`, then `pnpm --dir spikes/q63_persistence-migrations test`, `pnpm --dir spikes/q63_persistence-migrations typecheck`, `pnpm --dir spikes/q63_persistence-migrations lint`, `pnpm --dir spikes/q63_persistence-migrations build`; each must exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate evidence report, not assumed test counts. Failed compatibility blocks auth work and is surfaced to the dev.
 
 **Execution notes:** RED tests for adapter persistence, upgrade/collision/replay/concurrency first. Q65 restore of these fixtures follows in Phase 004; Q63 final acceptance waits for 7.2.
 

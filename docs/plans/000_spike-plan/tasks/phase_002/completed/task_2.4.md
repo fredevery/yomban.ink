@@ -1,8 +1,9 @@
 ---
 title: Prove migrations and Better Auth prefixed TEXT IDs
 created_session: '20261005_203953_63d2f4'
-sessions: []
-approved: false
+sessions:
+  - '20261006_171549_8fe055'
+approved: true
 ---
 
 # Task 2.4 — Prove migrations and Better Auth prefixed TEXT IDs
@@ -25,20 +26,24 @@ None — design/evidence or isolated non-product spike harness.
 
 ## Files
 
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/package.json`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/pnpm-lock.yaml`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/tsconfig.json`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/biome.json`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/README.md`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/proof.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/proof.test.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/vitest.config.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/wrangler.jsonc`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/drizzle.config.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/schema.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/auth.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/src/auth.test.ts`
-- Create: `docs/plans/000_spike-plan/spikes/q63_persistence-migrations/migrations/README.md`
+- Create: `spikes/q63_persistence-migrations/package.json`
+- Create: `spikes/q63_persistence-migrations/pnpm-lock.yaml`
+- Create: `spikes/q63_persistence-migrations/pnpm-workspace.yaml`
+- Create: `spikes/q63_persistence-migrations/tsconfig.json`
+- Create: `spikes/q63_persistence-migrations/src/env.d.ts`
+- Create: `spikes/q63_persistence-migrations/src/test-setup.ts`
+- Create: `spikes/q63_persistence-migrations/biome.json`
+- Create: `spikes/q63_persistence-migrations/README.md`
+- Create: `spikes/q63_persistence-migrations/src/proof.ts`
+- Create: `spikes/q63_persistence-migrations/src/proof.test.ts`
+- Create: `spikes/q63_persistence-migrations/vitest.config.ts`
+- Create: `spikes/q63_persistence-migrations/wrangler.jsonc`
+- Create: `spikes/q63_persistence-migrations/drizzle.config.ts`
+- Create: `spikes/q63_persistence-migrations/src/schema.ts`
+- Create: `spikes/q63_persistence-migrations/src/auth.ts`
+- Create: `spikes/q63_persistence-migrations/src/auth.test.ts`
+- Create: `spikes/q63_persistence-migrations/migrations/README.md`
+- Create: `spikes/q63_persistence-migrations/migrations/0000_luxuriant_virginia_dare.sql` + `migrations/meta/` (drizzle-kit generate output)
 - Modify: `docs/plans/000_spike-plan/designs/q63_persistence-migrations.md`
 - Modify: `docs/plans/000_spike-plan/evidence/q63_persistence-migrations.md`
 
@@ -57,11 +62,11 @@ ID and Q68 flows are rerun at reconciliation.
 
 Run actual schema-generation/migration commands (record exact command/output and generated
 path list) plus real-D1 tests. From repo root:
-`pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations install --frozen-lockfile`,
-then `pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations test`,
-`pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations typecheck`,
-`pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations lint`,
-`pnpm --dir docs/plans/000_spike-plan/spikes/q63_persistence-migrations build`; each must
+`pnpm --dir spikes/q63_persistence-migrations install --frozen-lockfile`,
+then `pnpm --dir spikes/q63_persistence-migrations test`,
+`pnpm --dir spikes/q63_persistence-migrations typecheck`,
+`pnpm --dir spikes/q63_persistence-migrations lint`,
+`pnpm --dir spikes/q63_persistence-migrations build`; each must
 exit 0 and assert the listed behavioral cases. Record observed outputs/versions in the gate
 evidence report, not assumed test counts. Failed compatibility blocks auth work and is
 surfaced to the dev.
