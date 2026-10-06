@@ -132,7 +132,7 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Independently verify this phase's outputs, preserve the stated gate state and obtain the dev's phase sign-off.
 **Files:**
-- Create: docs/decisions/0016-spike-phase-003-review.md
+- Create: docs/decisions/0017-spike-phase-003-review.md
 - Modify: docs/plans/000_spike-plan/phases/phase_003.md
 - Modify: docs/plans/000_spike-plan/000_spike-plan.md
 - Modify: docs/status/yomban-status.md
