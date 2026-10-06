@@ -5,22 +5,29 @@
 
 ## Current phase
 
-**Plan 000 ACTIVE — phase 001 (Q38 FIRST) tasks 1.1–1.4 executed; pending dev phase
-approval/close.** Q38 — core capability inventory — is **CLOSED** (the first and only
-Closed gate; ADR-0003, design/evidence + repo-root harness `spikes/q38_capability-inventory/`,
-all five harness commands exit 0, `Tests 7 passed (7)`). The phase review (task 1.4) re-ran
-all harness commands and validators (OPEN 0 understanding / valid state / clean diff) and
-recorded phase ADR-0014 (process acceptance; PASS-with-findings, no MUST — harness-path
-drift flagged, scope limits carried, owner/browser/cloud checks N/A). Phase 001's
-close-out edits are uncommitted; the dev's phase approval/close and any phase commit are
-the next Orca verbs. The project remains **greenfield / specification stage** — the spike
-harness is non-product proof code; no product code exists; the nine specs
-(`docs/specs/000–008`) state requirements and design gates, not an implementation.
+**Plan 000 ACTIVE — phase 002 (Q54 / Q63) tasks 2.1–2.5 executed; pending dev phase
+approval/close.** Q54 — content workflow semantics — INPUT is **ACCEPTED** (task 2.1
+evidence §3; ADR-0004 Proposed) and exercised by the task-2.2 real-D1 harness (21/21
+tests); the Q54 gate is NOT Closed (waits for Q67 guarantees, task 7.7). Q63 —
+DB placement/migrations/Better Auth — design is **PROVISIONAL** (shared single D1
+dev-accepted input; ADR-0005 Proposed) with the task-2.4 real-D1 proof run green (14/14
+tests; prefixed TEXT IDs proven on stored rows; ID scheme flagged pending Q40); the Q63
+gate is NOT Closed (final acceptance at task 7.2). The phase review (task 2.5) re-ran
+both phase harnesses plus the phase-001 prerequisite harness — all commands exit 0 (21+14+7
+tests) — and the validators (OPEN 0 understanding / valid state / clean diff), recording
+phase ADR-0016 (process acceptance; PASS-with-findings, no MUST — review-ADR number
+drift 0015→0016, ADR-0004 stale status line, closure-matrix rows predate 2.2/2.4;
+owner/browser/cloud checks N/A). Phase 002's close-out edits are uncommitted; the dev's
+phase approval/close and any phase commit are the next Orca verbs. Phase 001 is
+approved/closed prior: Q38 CLOSED (ADR-0003). The project remains **greenfield /
+specification stage** — the spike harnesses are non-product proof code; no product code
+exists; the nine specs (`docs/specs/000–008`) state requirements and design gates, not
+an implementation.
 
 **Immediate next step (for a fresh session):** dev-triggered phase approval/close for
-phase 001, then `/start-phase` phase 002 (workflow semantics / Q54 input + Q63 provisional
-designs). See [phase 001](../plans/000_spike-plan/phases/phase_001.md),
-[phase ADR-0014](../decisions/0014-spike-phase-001-review.md) and the parent plan's
+phase 002, then `/start-phase` phase 003 (coupled composition, contracts, candidate
+presentations/starter and local-first seams). See [phase 002](../plans/000_spike-plan/phases/phase_002.md),
+[phase ADR-0016](../decisions/0016-spike-phase-002-review.md) and the parent plan's
 [task summaries + closure matrix](../plans/000_spike-plan/000_spike-plan.md).
 
 ## Confirmed decisions (superset: `docs/decisions/0001-platform-foundations.md`)

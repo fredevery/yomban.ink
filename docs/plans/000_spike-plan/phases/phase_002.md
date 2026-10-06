@@ -2,8 +2,8 @@
 title: "Yomban.ink — spike phase 002: Workflow and persistence inputs — Q54 / Q63"
 created_session: "20261004_213034_2d1c21"
 sessions: []
-approved: false
-status: Draft
+approved: true
+status: Approved
 ---
 
 # Phase 002 — Workflow and persistence inputs — Q54 / Q63
@@ -160,7 +160,7 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Parallel:** false
 **Objective:** Independently verify this phase's outputs, preserve the stated gate state and obtain the dev's phase sign-off.
 **Files:**
-- Create: docs/decisions/0015-spike-phase-002-review.md
+- Create: docs/decisions/0016-spike-phase-002-review.md
 - Modify: docs/plans/000_spike-plan/phases/phase_002.md
 - Modify: docs/plans/000_spike-plan/000_spike-plan.md
 - Modify: docs/status/yomban-status.md
@@ -172,4 +172,23 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Execution notes:** Delegate review serially with the phase outputs and minimal owning-spec context. Report must/should/defer findings. Task-output review follows its own zero-findings/three-pass intervention rule; subsequent planning-document edits retain the two-pass cap. The review card is later mirrored and verified through Orca; this drafting task does not create cards.
 
 **Commits:** (none) — phase review/sign-off task; leave close-out edits uncommitted for the dev's phase gate.
+
+**Review outcome (task 2.5 executed 2026-10-06, session `20261006_200857_3334cc`):**
+Independent review re-ran both phase harnesses plus the phase-001 prerequisite harness —
+every command exit 0 (q54: `Tests 21 passed (21)`; q63: `Tests 14 passed (14)`;
+q38: `Tests 7 passed (7)`); validators OPEN 0 / state OK / `git diff --check` clean.
+Q54 review PASS (input accepted, evidence separates acceptance from unexecuted checks);
+Q63 review PASS (provisional proof intact, item 9 deferred to phase 7); no gate marked
+Closed anywhere. Findings: no MUST; 3 SHOULD (review-ADR number drift — allocated 0015
+was taken by ADR-0015, review recorded as ADR-0016; ADR-0004 status line cites stale
+"PENDING"; parent closure-matrix rows predate tasks 2.2/2.4); 2 DEFER. **Resolution
+(dev-authorized, 2026-10-06):** all five resolved in the phase close-out — ADR-0004's
+status/Consequences refreshed to ACCEPTED + green-run provenance; parent closure-matrix
+Q54/Q63 rows refreshed to "proof ran green; gate still open, closure at 7.2/7.7";
+phase/task Files repointed 0015→0016; task-file Verification strings reconciled to the
+ADR-0015 repo-root harness locations; D1 batch-size calibration (evidence §4 item 9)
+formally re-stamped as phase-7-owned in the q63 evidence file. Blocked
+owner/browser/cloud checks: N/A. Phase review ADR:
+`docs/decisions/0016-spike-phase-002-review.md` (process acceptance only). Phase
+`approved: false` and status Draft remain — dev approval/close is a separate Orca verb.
 

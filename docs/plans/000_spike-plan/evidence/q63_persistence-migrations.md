@@ -113,6 +113,10 @@ design document and is task 2.4's required evidence under the phase-002 contract
      for phase 7 reconciliation.
 9. **D1 batch-size limits vs large migrations** (§7): the step-chunking bound must
    be calibrated to observed D1 limits in the harness.
+   → **Owner: phase-007 reconciliation (task 7.2), re-stamped 2026-10-06.** This
+   item is deliberately NOT part of task 2.4's harness scope — the harness proves
+   semantics, not D1's production batch-size envelope. Calibrating the chunking
+   bound to observed D1 limits belongs with Q63's final acceptance at task 7.2.
 
 Executed in this task: document reading (the sources in the design §1 and §3), the
 official-docs checks recorded above (Drizzle D1/migrations docs and Better Auth

@@ -1,8 +1,9 @@
 # ADR-0004 — Content workflow semantics (Q54)
 
 - **Status:** Proposed (2026-10-05) — authored at task 2.1 of spike plan 000 phase_002; **not
-  accepted**. The workflow/evidence tests of task 2.2 and the dev's acceptance of the
-  workflow INPUT (`docs/plans/000_spike-plan/evidence/q54_content-workflows.md` §3, PENDING)
+  accepted**. The workflow/evidence tests of task 2.2 (run green 2026-10-06: 21/21 real-D1
+  tests) and the dev's acceptance of the workflow INPUT
+  (`docs/plans/000_spike-plan/evidence/q54_content-workflows.md` §3, ACCEPTED 2026-10-05)
   precede any closure — an ADR alone is not closure (Q19/Q61).
 - **Deciders:** semantics settled with the dev (owner) as recorded dev-accepted defaults;
   authored by the task-2.1 design agent. Not yet dev-ratified.
@@ -141,9 +142,10 @@ It reopens no locked decision (Q10/Q11/Q37/Q45/Q50/Q52/Q58; Amendment 001's addi
 
 ## Consequences
 
-- Q40/Q47 may design against this workflow INPUT **only after the dev accepts it** (evidence
-  §3, PENDING) and after task 2.2's workflow/evidence tests exercise it; Q54 gate closure
-  requires both plus this ADR's acceptance.
+- Q40/Q47 may design against this workflow INPUT now that the dev has accepted it (evidence
+  §3, ACCEPTED 2026-10-05) — task 2.2's workflow/evidence tests have run green (2026-10-06,
+  21/21 tests); Q54 gate closure requires this ADR's acceptance plus the Q67 guarantees
+  (task 7.7).
 - The state machine, history and revision-check semantics here are the contract the task-2.2
   tests and later content implementation must satisfy (R1–R4, R6 shapes).
 - The Q42 lifecycle shape (visibility/soft-delete/sort_order) becomes the shared baseline
