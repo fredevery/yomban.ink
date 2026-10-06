@@ -332,6 +332,36 @@ real behavior again, not borrow the spike's “passed” marker.
 
 ## Task completion summaries
 
+- **3.1 — Design composition, installation and invocation lifecycle:** shipped
+  `designs/q40_composition-lifecycle.md` (19 sections + requirement matrix: export
+  classes server-only/headless/server-safe/browser/DOM/presentation + optional manifest
+  facets; per-side core as framework-free `core-server`/`contracts`/`clients` packages
+  resolving Q9's open sub-question; composition roots import core+modules, core imports
+  no features; packaging = static workspace packages + ONE Worker per consumer hosting
+  all server roles; route/SSR/auth-handler ownership with in-process session on SSR and
+  `bearer()` for token reads; per-environment trusted-origin registry + CSRF on
+  cookie-authenticated mutations; immutable build metadata vs per-invocation env/user/
+  session/UOW/trace context — no binding I/O at init, no stale cached binding clients;
+  sink completion via waitUntil + redaction on success AND failure; UOW participation =
+  services get `contribute(op)` on ONE D1 batch, no independent commit on the handle; ID
+  algorithm `prefix_` + monotonic Crockford-base32 ULID-style with client ids final at
+  creation; enum/permission build-time aggregation into a derived artifact; install =
+  `workspace:^` in-workspace + git-URL/tag-semver out-of-repo (SHAPE accepted, syntax
+  UNVERIFIED pending the phase-006 probe), generated-vs-installed ownership table,
+  non-destructive updates; deterministic AI-orientation artifacts + AI-fill must pass
+  conformance; `upgrade` (contract majors + codemods) distinct from `migrate` (explicit
+  golden-path step, deploy never silently migrates); Q70 browser store per-session,
+  outside server UOW; provisional Q66/Q67/Q68 seams named; dashboard LCP ≤3.0s/INP
+  ≤200ms + overlay first-edit ≤1.0s/save-ack ≤100ms PROPOSALS forwarded to Q47) +
+  `evidence/q40_composition-lifecycle.md` (§2 traceability table; §3 dev acceptance
+  ACCEPTED in-conversation 2026-10-06 for all 7 provisional items — install-specifier
+  acceptance CONDITIONAL: shape accepted, syntax stays UNVERIFIED; §4 seven checks NOT
+  run with owners assigned to phase-006/Q47/Q68) + ADR
+  [docs/decisions/0006-composition-installation-and-lifecycle.md](../../decisions/0006-composition-installation-and-lifecycle.md)
+  (Proposed; 11 rejected alternatives; full acceptance waits phase-006 proofs + joint
+  7.8 closure). Reviews: two passes to zero (spec: 2 should locator fixes + bounded
+  re-review PASS; quality: 1 should + 1 defer fixed + bounded re-review PASS, zero new
+  findings). No new ADR from the retro — no amendment proposed. Unblocks task 3.2 (Q47).
 - **2.3 — Design placement, migration runner and auth integration:** shipped `designs/q63_persistence-migrations.md`
   (15 sections: shared-single-D1 placement comparison with dev-accepted selection; `core_`-reserved
   per-module `<ns>_<entity>` namespace with conformance-time collision rejection; topological ordering

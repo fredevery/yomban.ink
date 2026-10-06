@@ -1,8 +1,9 @@
 ---
 title: Design composition, installation and invocation lifecycle
 created_session: '20261006_210311_463e93'
-sessions: []
-approved: false
+sessions:
+  - '20261006_212010_4c6797'
+approved: true
 ---
 
 # Task 3.1 — Design composition, installation and invocation lifecycle
