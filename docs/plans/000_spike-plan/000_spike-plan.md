@@ -332,6 +332,35 @@ real behavior again, not borrow the spike's “passed” marker.
 
 ## Task completion summaries
 
+- **3.2 — Design client/wire/host/presentation contracts:** shipped
+  `designs/q47_client-host-contracts.md` (17 sections: mapped public DTO/runtime schemas
+  with validation in/out + serialization/route/error envelope; typed module-source client
+  PRIMARY — codegen/tRPC inference/OpenAPI generation rejected as primary; headless
+  DOM-API-free vs DOM vs presentation exports; host notification/lifecycle contracts;
+  public API + optional HTML invoke the SAME domain/authorization ops, HTML in-process;
+  renderer-neutral standard-admin descriptions vs explicit implementation-specific custom
+  views; host owns content DOM/config, panel mutates only its own DOM; editing-lifecycle
+  needs rich-text/drag-drop/crop/repeater/media/progress; unsaved state + local
+  sync/conflict surfacing; session-expiry/422/private history-cache isolation; Q47 fixture
+  per review §9 D2 (one page/list + edit-one + publish-action, no routing/SSR/
+  server-action/server-runtime; both hosts on unchanged services/contracts); THREE
+  separate candidate comparisons — dashboard Hono/htmx vs TS-controller/htmx-panel vs
+  alternatives, no selection adopted; conditional htmx security checks designed WITHOUT
+  adopting htmx (HX-Request never authorization, sanitize, hx-disable, no unneeded
+  evaluation, 422/expiry, history isolation); perf targets dashboard LCP ≤3.0s/INP ≤200ms
+  + overlay first-edit ≤1.0s/save-ack ≤100ms pending final dev adoption; WCAG 2.1 AA,
+  CSP, browser matrix; non-decisions + requirement matrix) + `evidence/q47_client-host-contracts.md`
+  (§2 traceability table; §3 seven items pending dev acceptance — candidate positions,
+  perf-target finalization, wire shapes, host verb model, headless DOM-API-free
+  strengthening, standard-admin mechanism; §4 eight checks NOT run with owners: fixture =
+  Q47-defined/Q61-executed/Q7-gated, boundary lint = phase-006) + ADR
+  [docs/decisions/0007-client-wire-host-and-presentation.md](../../decisions/0007-client-wire-host-and-presentation.md)
+  (Proposed; 14 decisions with starred open items; 11 rejected alternatives). Reviews: two
+  passes to zero (spec + quality; findings fixed and bounded re-reviews PASS — dev worked
+  the Manual Review items green by hand). Retro: no project ADR; one orca amendment
+  proposal (032, orca repo retros — sibling-derived-evidence single-dispatch boundary).
+  Unblocks task 3.3 (Q46).
+- **2.3 — Design placement, migration runner and auth integration:** shipped `designs/q63_persistence-migrations.md`
 - **3.1 — Design composition, installation and invocation lifecycle:** shipped
   `designs/q40_composition-lifecycle.md` (19 sections + requirement matrix: export
   classes server-only/headless/server-safe/browser/DOM/presentation + optional manifest

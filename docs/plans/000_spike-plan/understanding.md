@@ -7,6 +7,9 @@ approved: false
 
 # Agent's current understanding
 
+> Amendment 001 (`understanding-amendments-001.md`, 2026-10-07) adds plan-scope Q7 —
+> in-situ/overlay capability flagging (need confirmed; mechanism unsettled).
+
 This is the plan-scope UNDERSTAND record for `/new-plan`, begun on 2026-10-04.
 The directory `000_spike-plan/` is the final name confirmed by the dev in Q1.
 The plan and phase specifications have been drafted after zero OPEN validation
@@ -172,3 +175,12 @@ invoked `/approve-plan` (session `20261004_221017_9e0945`): the PLAN file alone 
 approved, mirrored to its PLAN card in To do. This understanding file's own approval
 flag is unchanged; phases/tasks remain unapproved and no activation or commit occurred.
 Next: `/extract-phases`, then `/extract-tasks`.
+
+## Amendment record
+
+- **Amendment 001** (`understanding-amendments-001.md`, 2026-10-07,
+  session `20261007_104930_b7edfe`): adds plan-scope **Q7 — in-situ/overlay capability
+  flagging**. Need confirmed by the dev during Q47 evidence acceptance (ADR-0007 §12
+  directional requirements); the flag mechanism is explicitly NOT settled — design
+  obligation for the Q47 presentation-role follow-on tasks. Additive; reopens no lock
+  and no prior Q1–Q6 answer.
