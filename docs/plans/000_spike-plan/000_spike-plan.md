@@ -332,6 +332,33 @@ real behavior again, not borrow the spike's “passed” marker.
 
 ## Task completion summaries
 
+- **3.4 — Design local-first datastore and sync mechanics:** shipped
+  `designs/q70_local-first-sync.md` (19 sections: `@sqlite.org/sqlite-wasm` sahpool driver +
+  drizzle `sqlite-proxy` seam — same `sqliteTable`, no schema fork; two sandboxed sahpool
+  instances for Class 1/2 physical separation; per-session worker lifecycle; aggregate
+  roots + multi-root action boundaries; one local transaction (data + change-row) with
+  WAL+exclusive-locking (atomicity NOT dependent on WAL; downgrade = dev reconciliation);
+  change-set envelope (`change_set_id` = Amendment 001 §B §4's `group_id`) → one D1 batch
+  with server-derived writes, fail-stop + rejected bucket; per-field base/rev three-way
+  conflicts; 120 s/40 s server-clock advisory leases, no-steal/same-user takeover/offline
+  provisional, remote-status not publish state; Class 1/2/3 server-authoritative working
+  sets; poll-on-focus/30 s-visible/reconnect transport; per-leased-record remote-apply
+  pause; current+N-1 payloads, too-old → read-only/export; one-way local migration with
+  snapshot; 30-day+all-replica-ACK tombstone GC + explicit purge; Q65/Q66/Q67 couplings;
+  §16 spike-owned policy table (PROPOSED values); Amendment 001 §§1–8 + 002 proof-case
+  matrix) + `evidence/q70_local-first-sync.md` (executed 2026-10-07: sqlite-wasm
+  3.53.4-build2 tarball/registry + Safari floor opfs ≥17/sahpool 16.4+; drizzle-orm 0.45.3
+  sqlite-proxy API from published .d.ts; 8 checks NOT run + conditional blockers recorded —
+  no silent in-memory fallback) + ADR
+  [docs/decisions/0009-local-first-datastore-and-sync.md](../../decisions/0009-local-first-datastore-and-sync.md)
+  (Proposed; 11 decisions incl. sahpool-default/single-connection/Web-Locks tab ownership,
+  WAL-optional, poll-only transport). Reviews: spec + quality passes to zero (findings
+  fixed: §8.x citation scheme → topic-keyed, WAL downgrade → dev reconciliation,
+  group_id reconciliation, ChangeOp deferral to 5.1/Q66, terminology normalization;
+  bounded re-reviews all PASS, no new defects). Retro: one orca lesson surfaced
+  (source-citation numbering must be verified, invented schemes attributed) → proposal
+  034 to the orca codebase. Unblocks task 3.5 (phase review).
+
 - **3.3 — Evaluate public-site starter and bounded support:** shipped
   `designs/q46_public-starter.md` (hard filters → bounded two-candidate shortlist →
   comparison matrix → selection proposal → bounded-support commitment table: supported

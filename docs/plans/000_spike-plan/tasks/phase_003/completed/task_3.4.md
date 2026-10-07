@@ -1,8 +1,8 @@
 ---
 title: Design local-first datastore and sync mechanics
 created_session: '20261006_210311_463e93'
-sessions: []
-approved: false
+sessions: ["20261007_183604_4c9d75"]
+approved: true
 ---
 
 # Task 3.4 — Design local-first datastore and sync mechanics
