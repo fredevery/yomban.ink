@@ -332,6 +332,26 @@ real behavior again, not borrow the spike's “passed” marker.
 
 ## Task completion summaries
 
+- **3.3 — Evaluate public-site starter and bounded support:** shipped
+  `designs/q46_public-starter.md` (hard filters → bounded two-candidate shortlist →
+  comparison matrix → selection proposal → bounded-support commitment table: supported
+  versions Astro 7.x only with the adapter peer range as authority, Q47-consumption-only
+  interface, generated-then-project-owned `apps/web`, Astro majors = consumer
+  responsibility, explicit exclusions; Q70 consumption duties §7) +
+  `evidence/q46_public-starter.md` (source-backed candidate matrix, 14 primary sources
+  verified 2026-10-07; Astro SEO claim marked UNVERIFIED-BY-PRIMARY-DOC, assigned to 6.4;
+  budgets recorded as targets) + ADR
+  [docs/decisions/0008-public-site-starter.md](../../decisions/0008-public-site-starter.md)
+  (Proposed; selection **Astro 7.x + `@astrojs/cloudflare`** over Next.js/OpenNext —
+  no Node-runtime emulation layer, 1:1 fit to the Q47 pages+islands contract model;
+  SvelteKit stays superseded, Hono/htmx not adopted for any public role, fixtures
+  proof-only, one starter, no Q69 influence). Dev accepted the shortlist/selection at the
+  2026-10-07 gate (Manual Review green); pure-app/minimal-public-surface consumption
+  deferred to backlog item 8. Adoption awaits task 6.4 proof + joint 7.8 closure.
+  Reviews: two passes to zero (spec + quality; findings fixed, bounded re-review PASS,
+  no new defects). Retro: no new project ADR; one backlog observation (two same-named
+  understanding-amendments-001 files — dev-directed). Unblocks task 6.4 (phase-006
+  starter proof).
 - **3.2 — Design client/wire/host/presentation contracts:** shipped
   `designs/q47_client-host-contracts.md` (17 sections: mapped public DTO/runtime schemas
   with validation in/out + serialization/route/error envelope; typed module-source client

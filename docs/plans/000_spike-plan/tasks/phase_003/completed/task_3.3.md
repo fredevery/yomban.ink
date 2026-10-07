@@ -1,8 +1,9 @@
 ---
 title: Evaluate public-site starter and bounded support
 created_session: '20261006_210311_463e93'
-sessions: []
-approved: false
+sessions:
+  - '20261007_120050_2515b8'
+approved: true
 ---
 
 # Task 3.3 — Evaluate public-site starter and bounded support
