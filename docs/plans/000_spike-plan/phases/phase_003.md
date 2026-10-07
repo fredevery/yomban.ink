@@ -2,8 +2,8 @@
 title: "Yomban.ink — spike phase 003: Coupled design inputs — Q40 / Q47 / Q46 / Q70"
 created_session: "20261004_213034_2d1c21"
 sessions: []
-approved: false
-status: Draft
+approved: true
+status: Approved (2026-10-07 — dev sign-off via /approve-phase; ADR-0017 PASS-with-findings, no MUST)
 ---
 
 # Phase 003 — Coupled design inputs — Q40 / Q47 / Q46 / Q70
@@ -144,4 +144,17 @@ execution stops at deliverable-ready, never auto-review/commit/next-task.
 **Execution notes:** Delegate review serially with the phase outputs and minimal owning-spec context. Report must/should/defer findings. Task-output review follows its own zero-findings/three-pass intervention rule; subsequent planning-document edits retain the two-pass cap. The review card is later mirrored and verified through Orca; this drafting task does not create cards.
 
 **Commits:** (none) — phase review/sign-off task; leave close-out edits uncommitted for the dev's phase gate.
+
+**Review record (task 3.5, 2026-10-07):** phase review complete — ADR-0017 records
+PASS-with-findings (no MUST). Verification: three prerequisite harnesses re-run from
+repo root, all five commands exit 0 each (7 + 21 + 14 tests); `git diff --check`,
+`validate-understanding.py` (OPEN: 0) and `validate-state.py` all exit 0; mechanical
+sweeps (own-§ refs, source tallies, gate banners, file hygiene) clean. Findings: one
+SHOULD fixed in pass (q47 design §17 `§13.4–5` → `§13 items 4–5`); SHOULDs recorded —
+closure-matrix Q40/Q47/Q46/Q70 rows refreshed from Planned (review pass), status doc
+refreshed; DEFERs (install-specifier syntax → 6.1–6.2; SEO verification → 6.4;
+Q70 browser/round-trip proofs → 5.1) carried with named owners. Gate state preserved:
+Q40/Q47/Q46/Q70 all NOT Closed; ADR-0006/0007/0008/0009 stay Proposed. Owner/browser/
+cloud checks N/A for this doc-only phase. Close-out edits left uncommitted per the
+task's (none) commit rule; `approved: true` flips only at the dev's `/approve-phase`.
 

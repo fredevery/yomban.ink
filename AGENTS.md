@@ -16,13 +16,13 @@ can build a full CMS *on top of* the platform by composing modules. The name dra
 - Owner / sole maintainer: **Fred Every** (`fred@fredevery.co.za`) — solo project.
 - Status: **greenfield, specification stage** — no product code yet. Onboarding is complete;
   **spike plan 000** is approved (`000_spike-plan.md` `approved: true`) and executing.
-- **Current Phase:** Plan 000, phase 003 — phase 002 (Q54 workflow semantics / Q63
-  persistence+migrations+auth inputs) APPROVED (2026-10-06): tasks 2.1–2.5 Done,
-  review PASS-with-findings (no MUST; all findings resolved in the close-out),
-  phase ADR-0016 recorded; Q54 input ACCEPTED / Q63 provisional — neither gate Closed
-  (closure at 7.2/7.7). Phase 001 CLOSED (Q38 Closed, ADR-0014).
-  Next: `/start-phase` for phase_003 (coupled Q40/Q47/Q46/Q70 design inputs) once
-  phase_002 is closed via `/close-phase`.
+- **Current Phase:** Plan 000, phase 003 (coupled Q40/Q47/Q46/Q70 design inputs)
+  APPROVED (2026-10-07): tasks 3.1–3.5 Done, review PASS-with-findings (no MUST),
+  phase ADR-0017 recorded; Q40/Q47/Q46/Q70 inputs accepted/proposed — none Closed
+  (joint closure at 7.2/7.8; Q46 adopted choice waits 6.4 + 7.8). Phase 002 CLOSED
+  (ADR-0016); phase 001 CLOSED (Q38 Closed, ADR-0014).
+  Next: `/close-phase` phase_003, then `/start-phase` phase_004 (Q65–Q68 designs
+  and fault evidence).
 
 ## Doc map (read before coding)
 

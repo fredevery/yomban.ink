@@ -5,29 +5,47 @@
 
 ## Current phase
 
-**Plan 000 ACTIVE — phase 002 (Q54 / Q63) tasks 2.1–2.5 executed; pending dev phase
-approval/close.** Q54 — content workflow semantics — INPUT is **ACCEPTED** (task 2.1
-evidence §3; ADR-0004 Proposed) and exercised by the task-2.2 real-D1 harness (21/21
-tests); the Q54 gate is NOT Closed (waits for Q67 guarantees, task 7.7). Q63 —
-DB placement/migrations/Better Auth — design is **PROVISIONAL** (shared single D1
-dev-accepted input; ADR-0005 Proposed) with the task-2.4 real-D1 proof run green (14/14
-tests; prefixed TEXT IDs proven on stored rows; ID scheme flagged pending Q40); the Q63
-gate is NOT Closed (final acceptance at task 7.2). The phase review (task 2.5) re-ran
-both phase harnesses plus the phase-001 prerequisite harness — all commands exit 0 (21+14+7
-tests) — and the validators (OPEN 0 understanding / valid state / clean diff), recording
-phase ADR-0016 (process acceptance; PASS-with-findings, no MUST — review-ADR number
-drift 0015→0016, ADR-0004 stale status line, closure-matrix rows predate 2.2/2.4;
-owner/browser/cloud checks N/A). Phase 002's close-out edits are uncommitted; the dev's
-phase approval/close and any phase commit are the next Orca verbs. Phase 001 is
-approved/closed prior: Q38 CLOSED (ADR-0003). The project remains **greenfield /
-specification stage** — the spike harnesses are non-product proof code; no product code
-exists; the nine specs (`docs/specs/000–008`) state requirements and design gates, not
-an implementation.
+**Plan 000 ACTIVE — phase 003 (Q40 / Q47 / Q46 / Q70 coupled design inputs) tasks
+3.1–3.5 executed; phase review (task 3.5) complete, pending dev phase approval/close.**
+All four coupled design trios shipped and their provisional decisions are dev-accepted
+(acceptance ≠ adoption; ADRs 0006/0007/0008/0009 all Proposed):
+
+- **Q40** — composition/installation/lifecycle: static workspace packages + one
+  Worker-per-consumer; per-side `core-server`/`contracts`/`clients`; base32 monotonic
+  prefixed IDs with client finality. Install-specifier syntax stays UNVERIFIED pending
+  the phase-006 probe (6.1–6.2). Joint closure 7.8.
+- **Q47** — client/wire/host/presentation contracts: shared runtime schemas, typed
+  module-source client (no codegen/tRPC/OpenAPI as primary), Q47-owned two-host fixture
+  definition (Q61 executes, Q7 gates); dashboard/controller/panel remain separate
+  candidate comparisons (selection pending proofs + dev decision); in-situ capability
+  flagging → plan-understanding amendment 001. Proof at 6.3; joint closure 7.8.
+- **Q46** — public-site starter: Astro 7.x + `@astrojs/cloudflare` selection APPROVED
+  by the dev (2026-10-07) with thin-`apps/web` + generality conditions (generality
+  tension → backlog item 8); Next.js + `@opennextjs/cloudflare` the bounded runner-up.
+  Adoption still awaits the executed proof at 6.4; joint closure 7.8.
+- **Q70** — local-first datastore/sync: `@sqlite.org/sqlite-wasm` sahpool VFS +
+  drizzle `sqlite-proxy` seam (same `sqliteTable` on both surfaces); advisory leases,
+  change-sets → one D1 batch, three-way conflicts; executed read-only source
+  verification (Safari <17 / sahpool 16.4+ floor recorded as a conditional risk).
+  Browser/round-trip proofs at 5.1–5.3; reconciliation 7.6.
+
+The phase review (task 3.5) re-ran the three prerequisite harnesses from repo root —
+all commands exit 0 (7 + 21 + 14 tests) — plus the validators (OPEN 0 understanding /
+valid state / clean diff), recorded phase ADR-0017 (process acceptance; PASS-with-
+findings, no MUST — a Q47 §-ref fix, closure-matrix Q40/Q47/Q46/Q70 rows refreshed
+from Planned, status doc refreshed; owner/browser/cloud checks N/A for this doc-only
+phase, carried to 5.1/6.4). Earlier phases stand: phase 002 APPROVED (2026-10-06,
+ADR-0016; Q54 input ACCEPTED / Q63 provisional, neither gate Closed — closure at
+7.2/7.7); phase 001 CLOSED (Q38 Closed, ADR-0003). No foundational gate beyond Q38 is
+Closed. The project remains **greenfield / specification stage** — the spike harnesses
+are non-product proof code; no product code exists; the nine specs (`docs/specs/000–008`)
+state requirements and design gates, not an implementation.
 
 **Immediate next step (for a fresh session):** dev-triggered phase approval/close for
-phase 002, then `/start-phase` phase 003 (coupled composition, contracts, candidate
-presentations/starter and local-first seams). See [phase 002](../plans/000_spike-plan/phases/phase_002.md),
-[phase ADR-0016](../decisions/0016-spike-phase-002-review.md) and the parent plan's
+phase 003 (`/approve-phase` → `/commit-phase` → `/close-phase`), then `/start-phase`
+phase 004 (affected-work gate designs Q65/Q66/Q67/Q68). See
+[phase 003](../plans/000_spike-plan/phases/phase_003.md),
+[phase ADR-0017](../decisions/0017-spike-phase-003-review.md) and the parent plan's
 [task summaries + closure matrix](../plans/000_spike-plan/000_spike-plan.md).
 
 ## Confirmed decisions (superset: `docs/decisions/0001-platform-foundations.md`)
@@ -39,7 +57,8 @@ presentations/starter and local-first seams). See [phase 002](../plans/000_spike
 - Prefixed sortable TEXT ids, no INTEGER PKs; module-owned PascalCase `Key='Key'` enums
   aggregated at build; permission keys `<Namespace>:<Member>` (Q11/Q50).
 - **Frontend independence is locked** (Q22/Q46); **no** public starter / dashboard /
-  controller / panel is selected (htmx candidates only).
+  controller / panel is *adopted* — Q46's Astro starter is a dev-approved selection
+  proposal pending the 6.4 proof; Q47's htmx/TS-controller candidates remain unadopted.
 - Repo-based distribution `@yomban-ink/*`, no npm publish; git-tagged releases; contract
   semver current + N-1 (Q48/Q49/Q64).
 - Privacy: platform-guardrailed, per-project-policied; guardrails reach client-local data
@@ -58,15 +77,15 @@ required).
 
 Foundational prerequisite spikes (one ADR + concrete design + verification evidence each):
 
-| Gate | Subject | Blocks |
+| Gate | Subject | State |
 |---|---|---|
-| **Q38** | Core capability inventory (run **first**) | capability verification; foundational implementation |
-| **Q40** | Package/export/composition/deployment/installation/lifecycle | composition/install/lifecycle implementation |
-| **Q46** | Reopened public-site starter choice | starter scaffolding; MVP public-client implementation |
-| **Q47** | Framework-free client/wire/host/presentation interfaces | client/host interfaces; final Q40 exports |
-| **Q54** | Content/publishing/editing workflow semantics | content/workflow, in-situ editing |
-| **Q63** | DB placement/migration mechanics + Better Auth prefixed-ID evidence | schema/migration/auth persistence |
-| **Q70** | Local-first client datastore + sync (additive; **MVP deliverable**) | the client-local store/sync layer |
+| **Q38** | Core capability inventory (run **first**) | **Closed** (2026-10-05, ADR-0003) |
+| **Q40** | Package/export/composition/deployment/installation/lifecycle | Design DELIVERED + dev-accepted provisional inputs; NOT Closed (6.1–6.2; joint 7.8) |
+| **Q46** | Reopened public-site starter choice | Design + selection proposal dev-approved; NOT Closed (6.4; joint 7.8) |
+| **Q47** | Framework-free client/wire/host/presentation interfaces | Design DELIVERED + dev-accepted provisional contracts; NOT Closed (6.3; joint 7.8) |
+| **Q54** | Content/publishing/editing workflow semantics | Input ACCEPTED; NOT Closed (7.7) |
+| **Q63** | DB placement/migration mechanics + Better Auth prefixed-ID evidence | Design DELIVERED + proof green; NOT Closed (7.2) |
+| **Q70** | Local-first client datastore + sync (additive; **MVP deliverable**) | Design + source verification, dev-accepted policies; NOT Closed (5.1–5.3; 7.6) |
 
 Final Q40/Q47 designs close **together**, after Q54 supplies workflow semantics; **Q46 closes
 alongside** them in MVP scope.
@@ -74,7 +93,7 @@ alongside** them in MVP scope.
 Affected-work gates (each closes before its own affected implementation **and** MVP deployment):
 **Q65** backup/retention/restore · **Q66** durable effects/retries/idempotency · **Q67** author
 read-your-writes/public propagation/preview isolation · **Q68** security surface profiles /
-rate limiting / first-admin bootstrap.
+rate limiting / first-admin bootstrap. Phase 004 designs Q65–Q68.
 
 Post-MVP: **Q69** (purpose/dogfooding of the `yomban.ink` site), search, mobile/Capacitor,
 additional complete production UI implementations.

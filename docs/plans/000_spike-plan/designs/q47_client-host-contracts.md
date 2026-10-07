@@ -466,7 +466,7 @@ device — the task text does not letter its clauses):
 | htmx conditional checks (not adopting htmx) | §13 |
 | Reactive fixture within locked bounds; both hosts unchanged services/contracts | §11 |
 | Explicit separate candidate comparisons, candidates not defaults | §12 |
-| Session-expiry/422 handling; private history isolation | §10, §13.4–5 |
+| Session-expiry/422 handling; private history isolation | §10, §13 items 4–5 |
 | Host owns content DOM; panel mutates only its own DOM | §5 |
 
 **Completeness note:** every task-3.2 acceptance clause maps to a row. The §12 verdicts
