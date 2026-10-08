@@ -30,6 +30,14 @@
 7. **Module conformance score / authoring lint report; OpenTelemetry alignment** — post-MVP
    opportunities (Q61/Q55; review §5 OPP-2/OPP-3). *Why deferred:* opportunities, not MVP
    constraints.
+8. **Pure-app platform consumption (minimal public surface)** — post-MVP (Q7/Q46; raised at
+   the 2026-10-07 Q46 dev acceptance). *Why deferred:* the MVP ships one SSR-first public
+   starter (Q7); a project whose product is almost entirely interactive (e.g. Critical
+   Sheets) has a minimal public face, where the starter can feel like ceremony — but
+   one-starter is an MVP scope rule, not an architectural claim. *What's needed:* evaluate
+   whether the public starter is optional per-project or whether a minimal-shell starter
+   variant is needed; only after MVP. Named future consumers confirmed by the dev: Spahn
+   App, Band Together, Critical Sheets.
 
 ## Housekeeping — RESOLVED at onboarding (2026-10-04)
 
