@@ -6,8 +6,8 @@
     "url": "https://trello.com/b/4f1jr3Wk/yombanink"
   },
   "activePlan": "docs/plans/000_spike-plan/000_spike-plan.md",
-  "currentPhase": null,
-  "currentTask": null,
-  "currentTaskSummary": null,
-  "lastSessionId": "20261007_211931_3acc78"
+  "currentPhase": "docs/plans/000_spike-plan/phases/phase_004.md",
+  "currentTask": "docs/plans/000_spike-plan/tasks/phase_004/in-progress/task_4.1.md",
+  "currentTaskSummary": "Design durable effects and idempotency (4.1)",
+  "lastSessionId": "20261008_195559_ce74a9"
 }
