@@ -7,7 +7,7 @@
   },
   "activePlan": "docs/plans/000_spike-plan/000_spike-plan.md",
   "currentPhase": "docs/plans/000_spike-plan/phases/phase_004.md",
-  "currentTask": "docs/plans/000_spike-plan/tasks/phase_004/in-progress/task_4.1.md",
-  "currentTaskSummary": "Design durable effects and idempotency (4.1)",
+  "currentTask": null,
+  "currentTaskSummary": null,
   "lastSessionId": "20261008_195559_ce74a9"
 }

@@ -3,7 +3,7 @@ title: Design durable effects and idempotency
 created_session: '20261008_165607_7dd859'
 sessions:
   - '20261008_195559_ce74a9'
-approved: false
+approved: true
 ---
 
 # Task 4.1 — Design durable effects and idempotency

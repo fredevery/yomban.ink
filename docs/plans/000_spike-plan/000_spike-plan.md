@@ -339,6 +339,26 @@ real behavior again, not borrow the spike's “passed” marker.
 
 ## Task completion summaries
 
+- **4.1 — Design durable effects and idempotency:** shipped
+  `designs/q66_durable-effects.md` (11 sections: effect classification durable-vs-telemetry;
+  fault-case map F1–F10 to 008 §Q66/Q52/Q56/Q57 + Amendment 001; three-candidate comparison —
+  D1 transactional outbox (A) PROPOSED as the durable-business mechanism with Queues (B) as
+  delivery transport, outbox = source of truth, manifest-declared cron drain sweep as the
+  commit/enqueue gap reconciler; producer-owned idempotency keys
+  `<entity-prefix>_<effect-kind>_<target-id>[_<nonce>]`, same-id+same-payload dedupe vs
+  same-id+different-payload reject; explicit-ack-after-durable, backoff, dead-letter, replay;
+  payload current+N-1; registry contributions stay one D1 batch; change_set_id conventions
+  feeding Q70 (op-log stays sync-only); sanitized diagnostics) +
+  `evidence/q66_durable-effects.md` (design-stage only — comparison, sources,
+  dev-input checklist, NOT-proven list; zero claimed runs; all fault evidence owned by 4.2) +
+  ADR [docs/decisions/0010-durable-effects-and-idempotency.md](../../decisions/0010-durable-effects-and-idempotency.md)
+  (Proposed, not accepted; gate Q66 stays DEFERRED). Reviews: spec + quality passes —
+  PASS-with-findings, no MUST; 3 SHOULD + 1 DEFER fixed (F4 injection-target/NOT-proven
+  coverage, F4 drain-marking coupling clarified, gate-table reference, ADR-0006 citation);
+  bounded re-review PASS 5/5, no new defects. Dev approvals pending at the 4.2 gate:
+  mechanism, key shape, classification split. Retro: no project ADR; two orca lessons
+  surfaced (docs-executor source re-reading → parent pre-digest; post-move column verify) →
+  proposal 037 to the orca codebase. Unblocks task 4.2.
 - **3.4 — Design local-first datastore and sync mechanics:** shipped
   `designs/q70_local-first-sync.md` (19 sections: `@sqlite.org/sqlite-wasm` sahpool driver +
   drizzle `sqlite-proxy` seam — same `sqliteTable`, no schema fork; two sandboxed sahpool
